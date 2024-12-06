@@ -1,0 +1,25 @@
+@use 'abstracts' as *;
+
+.button-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+}
+.button{
+    border: rgba($color4, 0.7) 0.15em solid;
+    background-color: inherit;
+    cursor: pointer;
+    border-radius: 1em;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0.5em 2em;
+    text-align: center;
+    text-decoration: none;
+    transition: border-color 0.1s ease;
+    box-shadow: 0.1em 0.1em 1em 0.05em rgba($color4, 0.3);
+    &:hover{
+        border-color: $color4;
+    }
+}
