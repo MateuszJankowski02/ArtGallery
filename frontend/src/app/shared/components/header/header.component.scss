@@ -1,0 +1,27 @@
+.header-wrapper{
+    border: 1px solid red !important;
+    display: flex;
+    max-width: 100%;
+    min-width: fit-content;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 5em;
+}
+
+.header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 2em;
+}
+
+.header-nav{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 2em;
+    width: 100%;
+}

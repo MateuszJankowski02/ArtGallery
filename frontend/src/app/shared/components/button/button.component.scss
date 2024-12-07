@@ -8,7 +8,6 @@
     height: fit-content;
 }
 .button{
-    border: rgba($color4, 0.7) 0.15em solid;
     background-color: inherit;
     cursor: pointer;
     border-radius: 1em;
@@ -18,8 +17,32 @@
     text-align: center;
     text-decoration: none;
     transition: border-color 0.1s ease;
-    box-shadow: 0.1em 0.1em 1em 0.05em rgba($color4, 0.3);
-    &:hover{
-        border-color: $color4;
+    white-space: nowrap;
+
+    &.button-border-1{
+      border: 0.15em solid $primary-color;;
+      box-shadow: 0.1em 0.1em 1em 0.05em rgba($primary-color, 0.3);
+      background-color: darken($primary-color, 60%);
+
+      &:hover{
+        border-color: lighten($primary-color, 10%);
+        box-shadow: 0.2em 0.2em 1.5em 0.1em rgba($primary-color, 0.5);
+        background-color: darken($primary-color, 50%);
+      }
     }
+
+    &.button-border-2{
+      border: 0.15em solid $secondary-color;
+      box-shadow: 0.1em 0.1em 1em 0.05em rgba($secondary-color, 0.3);
+      background-color: darken($secondary-color, 75%);
+
+      &:hover{
+        border-color: lighten($secondary-color, 10%);
+        box-shadow: 0.2em 0.2em 1.5em 0.1em rgba($secondary-color, 0.5);
+        background-color: darken($secondary-color, 65%);
+      }
+    }
+
 }
+
+
