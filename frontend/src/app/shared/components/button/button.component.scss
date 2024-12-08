@@ -22,10 +22,10 @@
     &.button-border-1{
       border: 0.15em solid $primary-color;;
       box-shadow: 0.1em 0.1em 1em 0.05em rgba($primary-color, 0.3);
-      background-color: darken($primary-color, 60%);
+      background-color: &background-color;
 
       &:hover{
-        border-color: lighten($primary-color, 10%);
+        border-color: darken($primary-color, 10%);
         box-shadow: 0.2em 0.2em 1.5em 0.1em rgba($primary-color, 0.5);
         background-color: darken($primary-color, 50%);
       }
@@ -34,10 +34,10 @@
     &.button-border-2{
       border: 0.15em solid $secondary-color;
       box-shadow: 0.1em 0.1em 1em 0.05em rgba($secondary-color, 0.3);
-      background-color: darken($secondary-color, 75%);
+      background-color: &background-color;
 
       &:hover{
-        border-color: lighten($secondary-color, 10%);
+        border-color: darken($secondary-color, 10%);
         box-shadow: 0.2em 0.2em 1.5em 0.1em rgba($secondary-color, 0.5);
         background-color: darken($secondary-color, 65%);
       }

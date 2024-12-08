@@ -1,5 +1,5 @@
 .header-wrapper{
-    border: 1px solid red !important;
+    //border: 1px solid red !important;
     display: flex;
     max-width: 100%;
     min-width: fit-content;
@@ -14,14 +14,43 @@
     grid-template-rows: 1fr;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    margin: 0 2em;
-}
-
-.header-nav{
-    display: flex;
-    justify-content: right;
-    align-items: center;
     gap: 2em;
     width: 100%;
+    margin: 0 2em;
+
+    .header-nav{
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      gap: 2em;
+      width: 100%;
+    }
+
+    .header-logo{
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      gap: 2em;
+      width: 100%;
+
+      .header-logo-image{
+        width: 4em;
+        height: 4em;
+
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .header-logo-text{
+        font-size: 1.5em;
+        font-weight: 600;
+        font-style: italic;
+        white-space: nowrap;
+      }
+    }
 }
+
+
