@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
+import { CarouselComponent } from '../carousel/carousel.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ButtonComponent, HeaderComponent],
+  imports: [HeaderComponent, CarouselComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
