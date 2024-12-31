@@ -1,18 +1,37 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FetchRandomImageService } from '../../../../core/services/fetch-random-image.service';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
-import { Observable, interval, Subscription, forkJoin } from 'rxjs';
+import { Observable, interval, Subscription, forkJoin, of } from 'rxjs';
+import { trigger, transition, style, animate, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-carousel',
   imports: [CommonModule],
   templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss']
+  styleUrls: ['./carousel.component.scss'],
+  animations: [
+    trigger('fadeAnimation', [
+      transition(':enter', [
+        animate('2000ms ease-in', keyframes([
+          style({ opacity: 0, offset: 0 }),
+          style({ opacity: 0, offset: 0.5 }),
+          style({ opacity: 1, offset: 1 })
+        ]))
+      ]),
+      transition(':leave', [
+        animate('2000ms ease-out', keyframes([
+          style({ opacity: 1, offset: 0 }),
+          style({ opacity: 1, offset: 0.5 }),
+          style({ opacity: 0, offset: 1 })
+        ]))
+      ])
+    ])
+  ]
 })
 
 export class CarouselComponent implements OnInit{
-  imageSrc: String | null = '';
   imageURLs$: Observable<string[] | null> = new Observable<string[] | null>();
+  loadedCount: number = 0;
   subscription : Subscription = new Subscription();
 
   constructor(
@@ -22,34 +41,36 @@ export class CarouselComponent implements OnInit{
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      //this.loadRandomImage();
       this.loadRandomURLs();
       const source = interval(10000);
-      //this.subscription = source.subscribe(() => this.loadRandomImage());
       this.subscription = source.subscribe(() => this.loadRandomURLs());
-
     }
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  /*
-  private loadRandomImage(): void {
-    this.fetchRandomImageService.fetchRandomImageURL(200, 300)
-      .subscribe(imageURL => {
-        this.imageSrc = imageURL;
-        console.log(this.imageSrc);
-      });
-  }
-  */
 
   private loadRandomURLs(): void {
-    this.imageURLs$ = forkJoin([
+    forkJoin([
       this.fetchRandomImageService.fetchRandomImageURL(),
       this.fetchRandomImageService.fetchRandomImageURL(),
       this.fetchRandomImageService.fetchRandomImageURL()
-    ]);
+    ]).subscribe(urls => {
+      this.imageURLs$ = of(urls);
+      this.loadedCount = 0; // reset before images load
+    });
+  }
+
+  onImageLoad(): void {
+    this.loadedCount++;
+    if (this.loadedCount === 3) {
+      // all images have fully loaded
+    }
+  }
+
+  trackByUrl(index: number, imageURL: string): string {
+    return imageURL;
   }
 
 }

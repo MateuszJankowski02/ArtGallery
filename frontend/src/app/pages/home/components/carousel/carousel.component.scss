@@ -1,4 +1,9 @@
-.carousel{
+.carousel-wrapper {
+  position: relative;
+}
+
+.carousel {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -6,4 +11,32 @@
     gap: 2em;
     width: 100%;
     margin: 0 2em;
+    .carousel-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      /* Optional: */
+      height: 100%;
+    }
+    .carousel-item:nth-child(1){
+      left: -15em;
+    }
+    .carousel-item:nth-child(2){
+      left: 0;
+    }
+    .carousel-item:nth-child(3){
+      left: 15em;
+    }
+    .carousel-item:nth-child(4){
+      left: -15em;
+    }
+    .carousel-item:nth-child(5){
+      left: 0;
+    }
+    .carousel-item:nth-child(6){
+      left: 15em;
+    }
 }
+
+
