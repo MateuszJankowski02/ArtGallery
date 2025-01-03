@@ -14,14 +14,14 @@ import { trigger, transition, style, animate, keyframes } from '@angular/animati
       transition(':enter', [
         animate('2000ms ease-in', keyframes([
           style({ opacity: 0, offset: 0 }),
-          style({ opacity: 0, offset: 0.5 }),
+          style({ opacity: 0, offset: 0.7 }),
           style({ opacity: 1, offset: 1 })
         ]))
       ]),
       transition(':leave', [
         animate('2000ms ease-out', keyframes([
           style({ opacity: 1, offset: 0 }),
-          style({ opacity: 1, offset: 0.5 }),
+          style({ opacity: 1, offset: 0.7 }),
           style({ opacity: 0, offset: 1 })
         ]))
       ])
@@ -32,6 +32,7 @@ import { trigger, transition, style, animate, keyframes } from '@angular/animati
 export class CarouselComponent implements OnInit{
   imageURLs$: Observable<string[] | null> = new Observable<string[] | null>();
   loadedCount: number = 0;
+  numberOfURLs: number = 7;
   subscription : Subscription = new Subscription();
 
   constructor(
@@ -40,6 +41,8 @@ export class CarouselComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+
+
     if (isPlatformBrowser(this.platformId)) {
       this.loadRandomURLs();
       const source = interval(10000);
@@ -52,13 +55,13 @@ export class CarouselComponent implements OnInit{
   }
 
   private loadRandomURLs(): void {
-    forkJoin([
-      this.fetchRandomImageService.fetchRandomImageURL(),
-      this.fetchRandomImageService.fetchRandomImageURL(),
+    const observables = Array.from({ length: this.numberOfURLs }, () =>
       this.fetchRandomImageService.fetchRandomImageURL()
-    ]).subscribe(urls => {
+    );
+
+    forkJoin(observables).subscribe(urls => {
       this.imageURLs$ = of(urls);
-      this.loadedCount = 0; // reset before images load
+      this.loadedCount = 0;
     });
   }
 

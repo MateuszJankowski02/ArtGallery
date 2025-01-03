@@ -1,41 +1,68 @@
+@use "sass:math";
+@use "../../../../../../public/styles/abstracts/" as *;
+
+
 .carousel-wrapper {
   position: relative;
+  overflow: hidden;
+  height: 20em;
+  width: 74em;
+  padding: 2em;
 }
 
 .carousel {
     position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 2em;
-    width: 100%;
-    margin: 0 2em;
+    width: inherit;
+    height: inherit;
     .carousel-item {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      /* Optional: */
-      height: 100%;
+      width: 8em;
+      height: 13em;
+
+      &::after {
+        z-index: 2000;
+        box-shadow: inset 0px 0px 10px 10px $background-color;
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0.5rem;
+      }
+
     }
-    .carousel-item:nth-child(1){
-      left: -15em;
+
+    @for $i from 1 through 7 {
+      @if $i < 5 {
+        .carousel-item:nth-child(#{$i}) {
+          transform: translateX(-10em + $i * 10em) translateY(($i * 1em) - 1em);
+        }
+      } @else {
+        .carousel-item:nth-child(#{$i}) {
+          transform: translateX(-10em + $i * 10em) translateY((($i * 1em) - 1em) - (($i - 4) * 2em));
+        }
+      }
     }
-    .carousel-item:nth-child(2){
-      left: 0;
-    }
-    .carousel-item:nth-child(3){
-      left: 15em;
-    }
-    .carousel-item:nth-child(4){
-      left: -15em;
-    }
-    .carousel-item:nth-child(5){
-      left: 0;
-    }
-    .carousel-item:nth-child(6){
-      left: 15em;
+
+    @for $i from 1 through 7 {
+      @if $i < 5 {
+        .carousel-item:nth-child(#{$i+7}) {
+          transform: translateX(-10em + $i * 10em) translateY(($i * 1em) - 1em);
+        }
+      } @else {
+        .carousel-item:nth-child(#{$i+7}) {
+          transform: translateX(-10em + $i * 10em) translateY((($i * 1em) - 1em) - (($i - 4) * 2em));
+        }
+      }
     }
 }
 
