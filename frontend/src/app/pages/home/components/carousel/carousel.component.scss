@@ -1,6 +1,7 @@
 @use "sass:math";
 @use "../../../../../../public/styles/abstracts/" as *;
 
+// host element
 :host {
   display: block;
   width: 100%;
@@ -11,7 +12,7 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  height: 20em;
+  height: 25em;
   width: 100%;
 }
 
@@ -19,15 +20,15 @@
     position: relative;
     width: 100%;
     height: 100%;
+
     .carousel-item {
       position: absolute;
       top: 0;
       left: 0;
-      //width: 8em;
-      //height: 13em;
-      width: 14.285714285714285714285714285714%;
-      height: 75%;
-      /*
+      width: 14.285%;
+      height: 65%;
+
+      // blur effect
       &::after {
         z-index: 2000;
         box-shadow: inset 0px 0px 10px 10px $background-color;
@@ -38,7 +39,6 @@
         top: 0;
         width: 100%;
       }
-        */
 
       img {
         width: 100%;
@@ -49,16 +49,17 @@
 
     }
 
+    // translaging the carousel items
     @for $i from 1 through 7 {
       @if $i < 5 {
         .carousel-item:nth-child(#{$i}) {
           //transform: translateX(-10em + $i * 10em) translateY(($i * 1em) - 1em);
-          transform: translateX(($i - 1) * 100%);
+          transform: translateX(($i - 1) * 100%) translateY(($i - 1) * 15%);
         }
       } @else {
         .carousel-item:nth-child(#{$i}) {
           //transform: translateX(-10em + $i * 10em) translateY((($i * 1em) - 1em) - (($i - 4) * 2em));
-          transform: translateX(($i - 1) * 100%);
+          transform: translateX(($i - 1) * 100%) translateY((($i - 1) * 15%) - (($i - 4) * 30%));
         }
       }
     }
@@ -67,12 +68,12 @@
       @if $i < 5 {
         .carousel-item:nth-child(#{$i+7}) {
           //transform: translateX(-10em + $i * 10em) translateY(($i * 1em) - 1em);
-          transform: translateX(-100%);
+          transform: translateX(($i - 1) * 100%) translateY(($i - 1) * 15%);
         }
       } @else {
         .carousel-item:nth-child(#{$i+7}) {
           //transform: translateX(-10em + $i * 10em) translateY((($i * 1em) - 1em) - (($i - 4) * 2em));
-          transform: translateX(-100%);
+          transform: translateX(($i - 1) * 100%) translateY((($i - 1) * 15%) - (($i - 4) * 30%));;
         }
       }
     }

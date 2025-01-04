@@ -1,7 +1,7 @@
 <div class="carousel-wrapper">
   <div [ngClass]="'carousel'">
       <div class="carousel-item" *ngFor="let imageURL of imageURLs$ | async; trackBy: trackByUrl" [@fadeAnimation]>
-        <img [src]="imageURL" alt="carousel image" (load)="onImageLoad()"/>
+        <img [ngSrc]="imageURL" alt="carousel image" (load)="onImageLoad()" width="1" height="1"/>
       </div>
   </div>
 </div>

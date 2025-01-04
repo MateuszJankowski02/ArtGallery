@@ -1,25 +1,25 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FetchRandomImageService } from '../../../../core/services/fetch-random-image.service';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
+import { isPlatformBrowser, CommonModule, NgOptimizedImage } from '@angular/common';
 import { Observable, interval, Subscription, forkJoin, of } from 'rxjs';
 import { trigger, transition, style, animate, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-carousel',
-  imports: [CommonModule],
+  imports: [CommonModule, NgOptimizedImage],
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
   animations: [
     trigger('fadeAnimation', [
       transition(':enter', [
-        animate('2000ms ease-in', keyframes([
+        animate('1500ms ease-in', keyframes([
           style({ opacity: 0, offset: 0 }),
           style({ opacity: 0, offset: 0.7 }),
           style({ opacity: 1, offset: 1 })
         ]))
       ]),
       transition(':leave', [
-        animate('2000ms ease-out', keyframes([
+        animate('1500ms ease-out', keyframes([
           style({ opacity: 1, offset: 0 }),
           style({ opacity: 1, offset: 0.7 }),
           style({ opacity: 0, offset: 1 })
@@ -30,10 +30,13 @@ import { trigger, transition, style, animate, keyframes } from '@angular/animati
 })
 
 export class CarouselComponent implements OnInit{
+  allImagesLoaded = false;
+
   imageURLs$: Observable<string[] | null> = new Observable<string[] | null>();
   loadedCount: number = 0;
   numberOfURLs: number = 7;
   subscription : Subscription = new Subscription();
+
 
   constructor(
     public fetchRandomImageService: FetchRandomImageService,
@@ -56,7 +59,7 @@ export class CarouselComponent implements OnInit{
 
   private loadRandomURLs(): void {
     const observables = Array.from({ length: this.numberOfURLs }, () =>
-      this.fetchRandomImageService.fetchRandomImageURL()
+      this.fetchRandomImageService.fetchRandomImageURL(260, 390)
     );
 
     forkJoin(observables).subscribe(urls => {
@@ -67,8 +70,8 @@ export class CarouselComponent implements OnInit{
 
   onImageLoad(): void {
     this.loadedCount++;
-    if (this.loadedCount === 3) {
-      // all images have fully loaded
+    if (this.loadedCount === 7) {
+      this.allImagesLoaded = true;
     }
   }
 
