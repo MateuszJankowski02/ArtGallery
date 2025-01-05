@@ -29,4 +29,4 @@ RUN npm install
 
 EXPOSE 8000 4200
 
-CMD ["bash", "-c", "cd /app/backend && python3 manage.py runserver 0.0.0.0:8000 & cd /app/frontend && ng serve --host 0.0.0.0 --port 4200"]
+CMD ["bash", "-c", "cd /app/backend/backendapi && python3 manage.py runserver 0.0.0.0:8000 & cd /app/frontend && ng serve --host 0.0.0.0 --port 4200"]
