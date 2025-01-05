@@ -91,4 +91,4 @@ class ArtworkTag(models.Model):
 
 # User model
 class User(AbstractUser):
-    pass
+    bio = models.TextField(blank=True, null=True)

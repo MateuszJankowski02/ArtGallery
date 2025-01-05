@@ -1,11 +1,15 @@
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from api.models import Artwork, Category, Tag, Collection, Comment, ReportedUser
-from api.serializers import ArtworkSerializer, CategorySerializer, TagSerializer, CollectionSerializer, CommentSerializer, ReportedUserSerializer
+from api.models import *
+from api.serializers import *
 
 
-# Create your views here.
+'''
+
+ListCreateAPIViews
+
+'''
 class ListCreateArtworkAPIView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ArtworkSerializer
@@ -59,3 +63,57 @@ class ListCreateReportedUserAPIView(generics.ListCreateAPIView):
         queryset = ReportedUser.objects.all().filter(user=self.request.user)
 
         return queryset
+    
+class ListCreateArtworkCategoryAPIView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ArtworkCategorySerializer
+
+    def get_queryset(self):
+        queryset = ArtworkCategory.objects.all()
+
+        return queryset
+    
+class ListCreateArtworkTagAPIView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ArtworkTagSerializer
+
+    def get_queryset(self):
+        queryset = ArtworkTag.objects.all()
+
+        return queryset
+    
+class ListCreateCollectionArtworkAPIView(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = CollectionArtworkSerializer
+
+    def get_queryset(self):
+        queryset = CollectionArtwork.objects.all()
+
+        return queryset
+    
+'''
+
+ListAPIView
+
+'''
+    
+class ListUserAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+
+        return queryset
+    
+'''
+
+RetrieveUpdateDestroyAPIViews
+
+'''
+
+class RetrieveUpdateDestroyArtworkAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ArtworkSerializer
+
+    queryset = Artwork.objects.all()

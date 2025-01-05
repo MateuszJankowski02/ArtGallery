@@ -8,4 +8,9 @@ urlpatterns = [
     path('collections/', views.ListCreateCollectionAPIView.as_view(), name='collections'),
     path('comments/', views.ListCreateCommentAPIView.as_view(), name='comments'),
     path('reported_users/', views.ListCreateReportedUserAPIView.as_view(), name='reported_users'),
+    path('artwork_categories/', views.ListCreateArtworkCategoryAPIView.as_view(), name='artwork_categories'),
+    path('collection_artworks/', views.ListCreateCollectionArtworkAPIView.as_view(), name='collection_artworks'),
+    path('artwork_tags/', views.ListCreateArtworkTagAPIView.as_view(), name='artwork_tags'),
+    path('users/', views.ListUserAPIView.as_view(), name='users'),
+    path('artworks/<int:pk>/', views.RetrieveUpdateDestroyArtworkAPIView.as_view(), name='artwork'),
 ]

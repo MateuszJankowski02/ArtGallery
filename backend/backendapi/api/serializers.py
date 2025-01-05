@@ -36,3 +36,25 @@ class ReportedUserSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['created_at']
 
+class ArtworkCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArtworkCategory
+        fields = '__all__'
+
+class ArtworkTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ArtworkTag
+        fields = '__all__'
+
+class CollectionArtworkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CollectionArtwork
+        fields = '__all__'
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'last_login', 'username', 'is_superuser', 'bio', 'email']
+        read_only_fields = ['last_login', 'is_superuser']
+
+
