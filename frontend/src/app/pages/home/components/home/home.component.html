@@ -1,5 +1,6 @@
 <div>
-  <app-header />
+  <app-header (showRegisterWindow)="changeRegisterWindowState($event)" />
+  <app-register-window *ngIf="showRegisterWindow" (showRegisterWindow)="changeRegisterWindowState($event)"/>
   <main class="home-wrapper">
     <app-carousel />
   </main>

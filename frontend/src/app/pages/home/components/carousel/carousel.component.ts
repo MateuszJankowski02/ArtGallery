@@ -44,8 +44,6 @@ export class CarouselComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-
-
     if (isPlatformBrowser(this.platformId)) {
       this.loadRandomURLs();
       const source = interval(10000);

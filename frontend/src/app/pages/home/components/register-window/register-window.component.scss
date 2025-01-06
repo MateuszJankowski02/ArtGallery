@@ -1,0 +1,23 @@
+.register-window-wrapper{
+    z-index: 1000;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    content: "";
+    border: 3px solid green;
+
+    .register-window{
+      z-index: 1000;
+      display: block;
+      position: fixed;
+      top: 15%;
+      left: 35%;
+      height: 70%;
+      width: 30%;
+      content: "";
+      border: 3px solid red;
+    }
+}
