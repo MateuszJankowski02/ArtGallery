@@ -1,8 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CreateUserService } from '../../../../core/services/create-user/create-user.service';
-import { UserRegister } from '../../interfaces/userRegister/userRegister';
+import { CreateUserService } from '../../service/create-user/create-user.service';
+import { UserRegister } from '../../interfaces/userRegister';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 
 

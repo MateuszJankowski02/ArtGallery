@@ -1,0 +1,120 @@
+@use "../../../../../../public/styles/abstracts" as *;
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+.invalid-input {
+  border: 2px solid red;
+}
+
+.invalid-input-shake{
+  animation: shake 0.2s;
+}
+
+.login-window-background{
+    z-index: 800;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.login-window-wrapper{
+    z-index: 900;
+    display: block;
+    position: fixed;
+
+    .login-window{
+      z-index: 901;
+      display: block;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: fit-content + 5em;
+      width: clamp(20em, 25%, 30em);
+      padding: 1em;
+      content: "";
+      box-shadow: 0 0 10px 10px $background-color;
+      border-radius: 1rem;
+      background-color: $background-color;
+      display: flex;
+      flex-direction: column;
+
+      .login-window-header{
+        position: relative;
+        display: block;
+
+        .login-image{
+          display: block;
+          height: 2em;
+          img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        .login-heading{
+          display:flex;
+          padding: 0.5em 0;
+          justify-content: center;
+          align-items: center;
+          h1{
+            font-family: 'Geraldine', sans-serif;
+            font-size: 1.5em;
+            font-weight: 500;
+          }
+        }
+
+        .login-close{
+          position: absolute;
+          right: 0;
+          top: 0;
+          height: 1.5em;
+          width: 1.5em;
+          cursor: pointer;
+          img{
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      .login-form-label{
+        display: flex;
+        flex-direction: column;
+        padding: 0.25em 0;
+        font-size: 1em;
+        font-weight: 500;
+
+        label{
+
+        }
+
+        input{
+          border-radius: 10px;
+          box-shadow: inset 0 0 1px 1px $background-color;
+          color: black;
+        }
+      }
+
+      .login-form-button{
+        display: flex;
+        justify-content: center;
+        padding: 1em 0;
+      }
+    }
+}
+
+
+
+

@@ -10,8 +10,13 @@ import { NgOptimizedImage } from '@angular/common';
 })
 export class HeaderComponent {
     @Output() showRegisterWindow = new EventEmitter<boolean>();
+    @Output() showLoginWindow = new EventEmitter<boolean>();
 
     onClickShowRegisterWindow(): void {
         this.showRegisterWindow.emit(true);
+    }
+
+    onClickShowLoginWindow(): void {
+        this.showLoginWindow.emit(true);
     }
 }

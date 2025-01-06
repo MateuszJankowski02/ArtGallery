@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="header-nav">
-      <app-button [title]="'Sign in'" color="button-border-1" />
+      <app-button [title]="'Sign in'" color="button-border-1" (click)="onClickShowLoginWindow()"/>
       <app-button [title]="'Register'" color="button-border-2" (click)="onClickShowRegisterWindow()" />
     </div>
   </div>

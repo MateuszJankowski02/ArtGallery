@@ -1,0 +1,46 @@
+<div class="login-window-wrapper">
+  <div class="login-window">
+    <div class="login-window-header">
+      <div class="login-image">
+        <img src="/assets/images/FunkyBloomLogo.png" alt="logo" width="1" height="1">
+      </div>
+      <div class="login-heading">
+        <h1>Become part of Funky Bloom</h1>
+      </div>
+      <div class="login-close" (click)="onClickHideLoginWindow()">
+        <img src="/assets/images/close-button-x-icon.png" alt="close" width="1" height="1">
+      </div>
+    </div>
+    <div class="login-form">
+      <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+        <div class="login-form-label">
+          <label for="loginUsernameOrEmail">Username/Email:</label>
+          <input
+            id="loginUsernameOrEmail"
+            type="text"
+            formControlName="loginUsernameOrEmail"
+            [ngClass]="{
+              'invalid-input': loginForm.get('loginUsernameOrEmail')?.invalid && loginForm.get('loginUsernameOrEmail')?.touched,
+              'invalid-input-shake': invalidInputShake && loginForm.get('loginUsernameOrEmail')?.invalid
+            }">
+        </div>
+        <div class="login-form-label">
+          <label for="loginPassword">Password:</label>
+          <input
+            id="loginPassword"
+            type="password"
+            formControlName="loginPassword"
+            [ngClass]="{
+              'invalid-input': loginForm.get('loginPassword')?.invalid && loginForm.get('loginPassword')?.touched,
+              'invalid-input-shake': invalidInputShake && loginForm.get('loginPassword')?.invalid
+            }">
+        </div>
+        <div class="login-form-button">
+          <app-button [title]="'Submit'" color="button-border-2" type="submit" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="login-window-background" (click)="onClickHideLoginWindow()"></div>
+
