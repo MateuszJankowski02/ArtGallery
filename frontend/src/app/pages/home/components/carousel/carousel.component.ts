@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { FetchRandomImageService } from '../../../../core/services/fetch-random-image.service';
+import { FetchRandomImageService } from '../../../../core/services/fetch-random-image/fetch-random-image.service';
 import { isPlatformBrowser, CommonModule, NgOptimizedImage } from '@angular/common';
 import { Observable, interval, Subscription, forkJoin, of } from 'rxjs';
 import { trigger, transition, style, animate, keyframes } from '@angular/animations';

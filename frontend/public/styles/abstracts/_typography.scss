@@ -1,5 +1,11 @@
 @use 'abstracts/colors' as *;
 
+/*
+
+ League Spartan font-face
+
+*/
+
 @font-face{
   font-family: 'League Spartan';
   src: url('../../assets/fonts/league-spartan/LeagueSpartan-Black.ttf') format('truetype');
@@ -63,12 +69,23 @@
   font-style: normal;
 }
 
+/*
+
+ Geraldine font-face
+
+*/
+
+@font-face{
+  font-family: 'Geraldine';
+  src: url('../../assets/fonts/geraldine/Geraldine.ttf') format('truetype');
+}
+
 * {
   font-family: 'League Spartan', sans-serif;
   font-weight: 300;
   font-size: clamp(1rem, 1.5vw, 1.5rem);
   line-height: 1.5;
-  color: $text-color;
+  color: $primary-text-color;
   word-spacing: 0.05em;
   letter-spacing: 0.02em;
 }

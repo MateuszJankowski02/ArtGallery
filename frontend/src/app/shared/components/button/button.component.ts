@@ -11,4 +11,5 @@ export class ButtonComponent {
   title = input<string>('');
   color = input<'button-border-1' |
                 'button-border-2'>('button-border-1');
+  type = input<string>('');
 }
