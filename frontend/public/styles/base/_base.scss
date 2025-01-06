@@ -1,5 +1,7 @@
 @use 'abstracts' as *;
 
 body{
-  background-color: $background-color
+  background-color: $background-color;
+  min-width: 50em;
+  min-height: 50em;
 }

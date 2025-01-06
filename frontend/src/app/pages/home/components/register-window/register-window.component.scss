@@ -1,23 +1,68 @@
-.register-window-wrapper{
-    z-index: 1000;
+@use "../../../../../../public/styles/abstracts/" as *;
+
+.register-window-background{
+    z-index: 800;
     display: block;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    content: "";
-    border: 3px solid green;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.register-window-wrapper{
+    z-index: 900;
+    display: block;
+    position: fixed;
 
     .register-window{
-      z-index: 1000;
+      z-index: 901;
       display: block;
       position: fixed;
-      top: 15%;
-      left: 35%;
-      height: 70%;
-      width: 30%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: clamp(20em, 70%, 60em);
+      width: clamp(20em, 25%, 30em);
+      padding: 1em;
       content: "";
-      border: 3px solid red;
+      box-shadow: 0 0 10px 10px $background-color;
+      border-radius: 1rem;
+      background-color: $background-color;
+      display: flex;
+      flex-direction: column;
+
+      .register-window-header{
+        position: relative;
+        display: block;
+
+        .register-image{
+          display: block;
+          height: 2em;
+          img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        .register-close{
+          position: absolute;
+          right: 0;
+          top: 0;
+          height: 1.5em;
+          width: 1.5em;
+          cursor: pointer;
+          img{
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
     }
 }
+
+
+
+

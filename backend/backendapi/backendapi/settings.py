@@ -81,11 +81,6 @@ DATABASES = {
         'NAME': 'appdatabase',
         'USER': 'appuser',
         'PASSWORD': 'admin',
-        #'HOST': 'localhost',
-        #'PORT': '5432',
-        #'NAME': 'mydatabase',
-        #'USER': 'myuser',
-        #'PASSWORD': 'mypassword',
         'HOST': 'db',
         'PORT': '5432',
     }
