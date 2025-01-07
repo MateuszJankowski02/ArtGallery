@@ -17,6 +17,7 @@ export class RegisterWindowComponent {
   @Output() showRegisterWindow = new EventEmitter<boolean>();
 
   invalidInputShake: boolean = false;
+  backendResponse: Promise<any> | null = null;
 
   constructor(private createUserService: CreateUserService) {}
 
@@ -62,11 +63,21 @@ export class RegisterWindowComponent {
     }
 
     this.registerForm.reset();
-    this.createUserService.createNewUser(
+
+    this.backendResponse = this.createUserService.createNewUser(
       newUser.registerUsername,
       newUser.registerEmail,
       newUser.registerPassword
     );
+
+
+    this.backendResponse.then((response) => {
+      console.log('User created successfully');
+      console.log(JSON.stringify(response, null, 2));
+    }).catch((error) => {
+      console.log('Error creating user');
+      console.error(JSON.stringify(error.error ?? error, null, 2));
+    });
   }
 
   triggerInvalidInputShake(): void {
