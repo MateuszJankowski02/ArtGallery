@@ -108,6 +108,21 @@ class ListUserAPIView(generics.ListAPIView):
     
 '''
 
+CreateAPIView
+
+'''
+
+class CreateUserAPIView(generics.CreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserCreateSerializer
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+
+        return queryset
+
+'''
+
 RetrieveUpdateDestroyAPIViews
 
 '''
@@ -116,4 +131,18 @@ class RetrieveUpdateDestroyArtworkAPIView(generics.RetrieveUpdateDestroyAPIView)
     permission_classes = [IsAuthenticated]
     serializer_class = ArtworkSerializer
 
-    queryset = Artwork.objects.all()
+    def get_queryset(self):
+        queryset = Artwork.objects.all()
+
+        return queryset
+    
+class RetrieveUpdateDestroyUserAPIView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+
+        return queryset
+
+
