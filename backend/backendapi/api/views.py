@@ -113,7 +113,7 @@ CreateAPIView
 '''
 
 class CreateUserAPIView(generics.CreateAPIView):
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     serializer_class = UserCreateSerializer
 
     def get_queryset(self):

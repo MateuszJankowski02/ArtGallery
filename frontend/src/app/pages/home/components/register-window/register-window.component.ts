@@ -65,8 +65,7 @@ export class RegisterWindowComponent {
     this.createUserService.createNewUser(
       newUser.registerUsername,
       newUser.registerEmail,
-      newUser.registerPassword,
-      newUser.registerConfirmPassword
+      newUser.registerPassword
     );
   }
 
