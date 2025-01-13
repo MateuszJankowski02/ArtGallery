@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 from api.models import *
 from api.serializers import *
 
@@ -106,20 +107,6 @@ class ListUserAPIView(generics.ListAPIView):
 
         return queryset
     
-'''
-
-CreateAPIView
-
-'''
-
-class CreateUserAPIView(generics.CreateAPIView):
-    #permission_classes = [IsAuthenticated]
-    serializer_class = UserCreateSerializer
-
-    def get_queryset(self):
-        queryset = User.objects.all()
-
-        return queryset
 
 '''
 
@@ -145,4 +132,35 @@ class RetrieveUpdateDestroyUserAPIView(generics.RetrieveUpdateDestroyAPIView):
 
         return queryset
 
+'''
+
+Login User API View
+
+'''
+
+class LoginUserAPIView(generics.CreateAPIView):
+    serializer_class = UserLoginSerializer
+    # Typically public, so you can remove or adjust permission_classes if needed.
+    permission_classes = []
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
+    
+'''
+
+Register User API View
+
+'''
+
+
+class CreateUserAPIView(generics.CreateAPIView):
+    #permission_classes = [IsAuthenticated]
+    serializer_class = UserCreateSerializer
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+
+        return queryset
 

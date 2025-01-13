@@ -13,6 +13,7 @@ urlpatterns = [
     path('artwork_tags/', views.ListCreateArtworkTagAPIView.as_view(), name='artwork_tags'),
     path('users/', views.ListUserAPIView.as_view(), name='users'),
     path('users/create/', views.CreateUserAPIView.as_view(), name='create_user'),
+    path('users/login/', views.LoginUserAPIView.as_view(), name='login_user'),
     path('users/<int:pk>/', views.RetrieveUpdateDestroyUserAPIView.as_view(), name='user'),
     path('artworks/<int:pk>/', views.RetrieveUpdateDestroyArtworkAPIView.as_view(), name='artwork'),
 ]

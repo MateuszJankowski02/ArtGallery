@@ -1,16 +1,19 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { ButtonComponent } from "../button/button.component";
-import { NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, CommonModule } from '@angular/common';
+
 
 @Component({
-  selector: 'app-header',
-  imports: [ButtonComponent, NgOptimizedImage],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  selector: 'app-landing-header',
+  imports: [ButtonComponent, NgOptimizedImage, CommonModule],
+  templateUrl: './landing-header.component.html',
+  styleUrl: './landing-header.component.scss'
 })
-export class HeaderComponent {
+export class LandingHeaderComponent {
     @Output() showRegisterWindow = new EventEmitter<boolean>();
     @Output() showLoginWindow = new EventEmitter<boolean>();
+
+    constructor() {}
 
     onClickShowRegisterWindow(): void {
         this.showRegisterWindow.emit(true);

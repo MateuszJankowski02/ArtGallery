@@ -64,6 +64,38 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
     
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    email = serializers.CharField()
+    password = serializers.CharField()
+
+    class Meta:
+        fields = ['username' ,'email', 'password']
+
+    def validate(self, data):
+        username = data.get('username')
+        email = data.get('email')
+        password = data.get('password')
+
+        if not username and not email:
+            raise serializers.ValidationError('A username or email is required to log in.')
+        if not password:
+            raise serializers.ValidationError('A password is required to log in.')
+
+        # Check if provided login is an email or just a username
+        user = User.objects.filter(email=email).first() or User.objects.filter(username=username).first()
+        
+        if not user:
+            raise serializers.ValidationError('User not found.')
+
+        if not user.check_password(password):
+            raise serializers.ValidationError('Invalid password.')
+
+        return {
+            'id': user.id,
+        }
+
+    
 class UserCreateSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
         validators=[UniqueValidator(queryset=User.objects.all())]
