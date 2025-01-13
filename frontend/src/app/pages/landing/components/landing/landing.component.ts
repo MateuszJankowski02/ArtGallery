@@ -6,7 +6,7 @@ import { RegisterWindowComponent } from "../register-window/register-window.comp
 import { LoginWindowComponent } from "../login-window/login-window.component";
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-landing',
   imports: [
     CommonModule,
     HeaderComponent,
@@ -14,10 +14,10 @@ import { LoginWindowComponent } from "../login-window/login-window.component";
     RegisterWindowComponent,
     LoginWindowComponent
   ],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './landing.component.html',
+  styleUrl: './landing.component.scss'
 })
-export class HomeComponent {
+export class LandingComponent {
   showRegisterWindow: boolean = false;
   showLoginWindow: boolean = false;
 
