@@ -18,6 +18,7 @@ export class RegisterWindowComponent {
 
   invalidInputShake: boolean = false;
   backendResponse: Promise<any> | null = null;
+  errorMessages: string[] = [];
 
   constructor(private createUserService: CreateUserService) {}
 
@@ -39,7 +40,7 @@ export class RegisterWindowComponent {
 
   registerForm = new FormGroup({
     registerUsername: new FormControl('', Validators.required),
-    registerEmail: new FormControl('', [Validators.required, Validators.email]),
+    registerEmail: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]+$')]),
     registerPassword: new FormControl('', Validators.required),
     registerConfirmPassword: new FormControl('', Validators.required)
   }, { validators: this.passwordMatchValidator });
@@ -72,10 +73,34 @@ export class RegisterWindowComponent {
 
 
     this.backendResponse.then((response) => {
-      console.log('User created successfully');
       console.log(JSON.stringify(response, null, 2));
+      if(response.status === 201){
+        console.log("Status:", response.status);
+        this.errorMessages = [];
+        return;
+      }
+      if(response.status === 400){
+        console.log("Status:", response.status);
+        this.errorMessages = [];
+        for (const key in response.data) {
+          if (response.data.hasOwnProperty(key)) {
+            console.log(`${key}:`, response.data[key]);
+            if(response.data[key].includes('This field must be unique.')){
+              if(key === 'username'){
+                this.errorMessages.push(`Username already exists`);
+                continue;
+              }
+              if(key === 'email'){
+                this.errorMessages.push(`Email already exists`);
+                continue;
+              }
+              this.errorMessages.push(`Already exists: ${key}`);
+            }
+            this.errorMessages.push(`${response.data[key]}`);
+          }
+        }
+      }
     }).catch((error) => {
-      console.log('Error creating user');
       console.error(JSON.stringify(error.error ?? error, null, 2));
     });
   }

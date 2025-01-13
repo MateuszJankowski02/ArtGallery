@@ -7,24 +7,6 @@ import axios, { AxiosResponse } from 'axios';
 export class CreateUserService {
 
   constructor(){}
-  /*
-  async createNewUser(
-    registerUsername: string,
-    registerEmail: string,
-    registerPassword: string
-  ): Promise<any> {
-    try {
-      const response: AxiosResponse = await axios.post('http://localhost:8000/api/users/create/', {
-        username: registerUsername,
-        email: registerEmail,
-        password: registerPassword,
-      });
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  }
-  */
   async createNewUser(
     registerUsername: string,
     registerEmail: string,
@@ -39,14 +21,18 @@ export class CreateUserService {
       });
 
       // The request was made and the server responded with a status code
-      console.log('User created successfully:', response.data);
-      return response.data;
+      if(response.status === 201){
+        console.log('User created successfully:', response.data);
+        console.log('Status:', response.status);
+      }
+      return response;
 
     } catch (error: any) {
 
       if (error.response) {
         // The request was made and the server responded with a status code
-        console.error('Validation Error:', error.response.data);
+        console.error('Validation Error:', error.response);
+        return error.response;
       } else if (error.request) {
         // The request was made but no response was received
         console.error('No response received:', error.request);

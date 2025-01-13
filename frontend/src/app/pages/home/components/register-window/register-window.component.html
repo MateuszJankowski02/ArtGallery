@@ -57,6 +57,9 @@
               'invalid-input-shake': invalidInputShake && registerForm.get('registerConfirmPassword')?.invalid
             }">
         </div>
+        <div *ngIf="errorMessages.length > 0" class="register-form-error">
+          <div *ngFor="let error of errorMessages">{{ error }}</div>
+        </div>
         <div class="register-form-button">
           <app-button [title]="'Submit'" color="button-border-2" type="submit" />
         </div>
