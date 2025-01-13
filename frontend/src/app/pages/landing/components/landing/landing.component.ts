@@ -23,12 +23,10 @@ export class LandingComponent {
 
   changeRegisterWindowState(state: boolean): void {
     this.showRegisterWindow = state;
-    console.log(state);
   }
 
   changeLoginWindowState(state: boolean): void {
     this.showLoginWindow = state;
-    console.log(state);
   }
 }
 
