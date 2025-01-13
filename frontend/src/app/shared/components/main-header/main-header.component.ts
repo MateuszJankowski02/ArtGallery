@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgOptimizedImage, CommonModule } from '@angular/common';
 import { ButtonComponent } from "../button/button.component";
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-header',
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, ButtonComponent, NgOptimizedImage],
   templateUrl: './main-header.component.html',
   styleUrl: './main-header.component.scss'
 })
@@ -14,6 +14,6 @@ export class MainHeaderComponent {
 
   onClickLogout(): void {
     this.router.navigate(['/']);
-    localStorage.removeItem('user');
+    localStorage.removeItem('userId');
   }
 }
