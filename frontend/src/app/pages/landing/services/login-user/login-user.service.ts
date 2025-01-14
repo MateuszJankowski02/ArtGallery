@@ -22,7 +22,7 @@ export class LoginUserService {
       if(response.status === 200) {
         console.log('User logged in successfully:', response.data);
         console.log('Status:', response.status);
-        localStorage.setItem('userId', response.data.id);
+        localStorage.setItem('userId', response.data.user_id);
         localStorage.setItem('token', response.data.token);
       }
       return response;
