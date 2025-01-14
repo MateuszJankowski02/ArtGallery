@@ -10,7 +10,17 @@ export class FetchCategoriesService {
   // fetch first 10 categories
   async getCategories(): Promise<any> {
     try {
-      const response = await axios.get('http://localhost:8000/api/categories/');
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        throw new Error('Authentication token not found.');
+      }
+
+      const response = await axios.get('http://localhost:8000/api/categories/', {
+        headers: {
+          Authorization: `Token ${token}`
+        }
+      });
       response.data = response.data.slice(0, 10);
 
       if(response.status === 200){

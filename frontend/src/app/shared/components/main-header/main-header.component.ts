@@ -14,6 +14,6 @@ export class MainHeaderComponent {
 
   onClickLogout(): void {
     this.router.navigate(['/']);
-    localStorage.removeItem('userId');
+    localStorage.clear();
   }
 }

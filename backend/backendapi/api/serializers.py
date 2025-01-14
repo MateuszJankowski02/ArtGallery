@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
+from rest_framework.authtoken.models import Token
 from api.models import *
 
 
@@ -117,6 +118,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
             bio=validated_data.get('bio', ''),
             password=validated_data['password']
         )
+        token = Token.objects.create(user=user)
         return user
 
 

@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-category',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './category.component.html',
   styleUrl: './category.component.scss'
 })
 export class CategoryComponent {
-  @Input() categoryTitle: string = '';
+  @Input() categoryName: string = '';
   @Input() categoryImageURL: string = '';
 
   constructor() {}

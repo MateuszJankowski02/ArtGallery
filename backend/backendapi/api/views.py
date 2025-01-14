@@ -140,13 +140,27 @@ Login User API View
 
 class LoginUserAPIView(generics.CreateAPIView):
     serializer_class = UserLoginSerializer
-    # Typically public, so you can remove or adjust permission_classes if needed.
     permission_classes = []
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response(serializer.validated_data, status=status.HTTP_200_OK)
+        
+        user_id = serializer.validated_data['id']
+        
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        token, created = Token.objects.get_or_create(user=user)
+        
+        return Response({
+            'token': token.key,
+            'user_id': user.id,
+            'username': user.username,
+            'email': user.email
+        }, status=status.HTTP_200_OK)
     
 '''
 

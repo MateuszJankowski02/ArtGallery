@@ -1,8 +1,9 @@
 <div class="categories-wrapper">
   <div class="categories">
     <app-category
-      *ngFor="let categoryName of categoryNames"
-      [categoryTitle]="categoryName"
-    />
+      *ngFor="let category of categories"
+      [categoryName]="category.name"
+      [categoryImageURL]="category.imageURL"
+    ></app-category>
   </div>
 </div>

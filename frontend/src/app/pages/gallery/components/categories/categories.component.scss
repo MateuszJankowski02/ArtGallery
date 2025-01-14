@@ -1,0 +1,25 @@
+:host{
+  width: 100%;
+  height: min-height;
+  display: block;
+  padding: 0 5em;
+}
+
+.categories-wrapper{
+  width: 100%;
+  height: min-height;
+
+  .categories{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 1em;
+    width: 100%;
+    height: min-height;
+    padding: 0 20px;
+  }
+}
+
+
