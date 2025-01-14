@@ -32,7 +32,8 @@ export class CategoriesComponent implements OnInit {
       if (response.status === 200) {
         console.log('Categories fetched successfully:', response.data);
         console.log('Status:', response.status);
-        this.categories = response.data.map((category: any) => {
+        response.data.results = response.data.results.slice(0, 10);
+        this.categories = response.data.results.map((category: any) => {
 
           return {
             name: category.name,

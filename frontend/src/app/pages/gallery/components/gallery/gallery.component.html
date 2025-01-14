@@ -1,2 +1,25 @@
 <app-main-header />
 <app-categories />
+
+<div
+  class="gallery"
+  infiniteScroll
+  [infiniteScrollDistance]="scrollDistance"
+  [infiniteScrollThrottle]="throttle"
+  (scrolled)="onScroll()"
+>
+  <div class="image-container" *ngFor="let artwork of artworks">
+    <img
+      [appLazyLoadImage]="artwork.url"
+      alt="{{ artwork.title }}"
+      class="gallery-image"
+    />
+    <div class="title">{{ artwork.title }}</div>
+  </div>
+  <div class="loading" *ngIf="loading">
+    Loading more artworks...
+  </div>
+  <div class="end-message" *ngIf="allLoaded">
+    You have reached the end.
+  </div>
+</div>

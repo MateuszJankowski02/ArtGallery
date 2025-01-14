@@ -8,7 +8,7 @@ export class FetchCategoriesService {
 
   constructor() { }
   // fetch first 10 categories
-  async getCategories(): Promise<any> {
+  async getCategories(page: number = 1): Promise<any> {
     try {
       const token = localStorage.getItem('token');
 
@@ -16,12 +16,11 @@ export class FetchCategoriesService {
         throw new Error('Authentication token not found.');
       }
 
-      const response = await axios.get('http://localhost:8000/api/categories/', {
+      const response = await axios.get(`http://localhost:8000/api/categories/?page=${page}`, {
         headers: {
           Authorization: `Token ${token}`
         }
       });
-      response.data = response.data.slice(0, 10);
 
       if(response.status === 200){
         console.log('Categories fetched successfully:', response.data);
