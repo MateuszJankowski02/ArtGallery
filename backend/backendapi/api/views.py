@@ -107,6 +107,11 @@ class ListUserAPIView(generics.ListAPIView):
 
         return queryset
     
+class ListArtworkBasicAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ArtworkBasicSerializer
+    queryset = Artwork.objects.all()
+    
 
 '''
 

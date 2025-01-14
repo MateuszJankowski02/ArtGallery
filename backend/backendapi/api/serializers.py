@@ -120,5 +120,12 @@ class UserCreateSerializer(serializers.ModelSerializer):
         )
         token = Token.objects.create(user=user)
         return user
+    
+class ArtworkBasicSerializer(serializers.ModelSerializer):
+    tag = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = Artwork
+        fields = ['id', 'url', 'tag']
 
 

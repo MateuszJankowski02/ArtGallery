@@ -3,6 +3,8 @@ from api import views
 
 urlpatterns = [
     path('artworks/', views.ListCreateArtworkAPIView.as_view(), name='artworks'),
+    path('artworks/basic/', views.ListArtworkBasicAPIView.as_view(), name='basic_artworks'),
+    path('artworks/<int:pk>/', views.RetrieveUpdateDestroyArtworkAPIView.as_view(), name='artwork'),
     path('categories/', views.ListCreateCategoryAPIView.as_view(), name='categories'),
     path('tags/', views.ListCreateTags.as_view(), name='tags'),
     path('collections/', views.ListCreateCollectionAPIView.as_view(), name='collections'),
@@ -15,5 +17,5 @@ urlpatterns = [
     path('users/create/', views.CreateUserAPIView.as_view(), name='create_user'),
     path('users/login/', views.LoginUserAPIView.as_view(), name='login_user'),
     path('users/<int:pk>/', views.RetrieveUpdateDestroyUserAPIView.as_view(), name='user'),
-    path('artworks/<int:pk>/', views.RetrieveUpdateDestroyArtworkAPIView.as_view(), name='artwork'),
+    
 ]
