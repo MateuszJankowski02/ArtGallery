@@ -1,10 +1,8 @@
 <div class="categories-wrapper">
   <div class="categories">
     <app-category
-      *ngFor="let category of categories"
-      [categoryTitle]="category.title"
-      [categoryImage]="category.image"
-      (clickCategory)="onClickCategory($event)"
+      *ngFor="let categoryName of categoryNames"
+      [categoryTitle]="categoryName"
     />
   </div>
 </div>

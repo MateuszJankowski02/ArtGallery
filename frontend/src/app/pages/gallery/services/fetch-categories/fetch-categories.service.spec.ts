@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FetchCategoriesService } from '../fetch-categories.service';
+import { FetchCategoriesService } from './fetch-categories.service';
 
 describe('FetchCategoriesService', () => {
   let service: FetchCategoriesService;
