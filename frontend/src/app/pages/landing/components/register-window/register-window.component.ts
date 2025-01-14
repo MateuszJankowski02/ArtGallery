@@ -102,6 +102,8 @@ export class RegisterWindowComponent {
       }
     }).catch((error) => {
       console.error(JSON.stringify(error.error ?? error, null, 2));
+      this.errorMessages = [];
+      this.errorMessages.push('An error occurred while trying to register. Please try again later.');
     });
   }
 

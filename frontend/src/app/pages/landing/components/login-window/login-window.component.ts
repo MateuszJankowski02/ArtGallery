@@ -70,6 +70,8 @@ export class LoginWindowComponent {
         }
       }).catch((error) => {
         console.error(JSON.stringify(error.error ?? error, null, 2));
+        this.errorMessages = [];
+        this.errorMessages.push('An error occurred while trying to log in. Please try again later.');
       });
 
     }
