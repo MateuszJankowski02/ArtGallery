@@ -61,10 +61,10 @@ export class LoginWindowComponent {
         if(response.status === 400){
           console.log("Status:", response.status);
           this.errorMessages = [];
-          for (const key in response.data.results) {
-            if (response.data.results.hasOwnProperty(key)) {
-              console.log(`${key}:`, response.data.results[key]);
-              this.errorMessages.push(`${response.dataresults[key]}`);
+          for (const key in response.data) {
+            if (response.data.hasOwnProperty(key)) {
+              console.log(`${key}:`, response.data[key]);
+              this.errorMessages.push(`${response.data[key]}`);
             }
           }
         }

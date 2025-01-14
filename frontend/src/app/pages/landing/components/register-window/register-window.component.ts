@@ -82,10 +82,10 @@ export class RegisterWindowComponent {
       if(response.status === 400){
         console.log("Status:", response.status);
         this.errorMessages = [];
-        for (const key in response.data.results) {
+        for (const key in response.data) {
           if (response.data.results.hasOwnProperty(key)) {
-            console.log(`${key}:`, response.data.results[key]);
-            if(response.data.results[key].includes('This field must be unique.')){
+            console.log(`${key}:`, response.data[key]);
+            if(response.data[key].includes('This field must be unique.')){
               if(key === 'username'){
                 this.errorMessages.push(`Username already exists`);
                 continue;
@@ -96,7 +96,7 @@ export class RegisterWindowComponent {
               }
               this.errorMessages.push(`Already exists: ${key}`);
             }
-            this.errorMessages.push(`${response.data.results[key]}`);
+            this.errorMessages.push(`${response.data[key]}`);
           }
         }
       }
