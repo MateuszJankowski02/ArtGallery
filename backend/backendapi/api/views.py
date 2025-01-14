@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from api.models import *
 from api.serializers import *
@@ -144,8 +144,9 @@ Login User API View
 '''
 
 class LoginUserAPIView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
     serializer_class = UserLoginSerializer
-    permission_classes = []
+    
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -175,7 +176,7 @@ Register User API View
 
 
 class CreateUserAPIView(generics.CreateAPIView):
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     serializer_class = UserCreateSerializer
 
     def get_queryset(self):
