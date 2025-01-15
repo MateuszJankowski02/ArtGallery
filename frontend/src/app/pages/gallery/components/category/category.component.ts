@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -8,12 +9,15 @@ import { CommonModule } from '@angular/common';
   styleUrl: './category.component.scss'
 })
 export class CategoryComponent {
+  @Input() categoryId: number = 0;
   @Input() categoryName: string = '';
   @Input() categoryImageURL: string = '';
 
-  constructor() {}
 
-  onClickCategory(category: string): void {
-    console.log('Clicked on category:', category);
+  constructor(private router: Router) {}
+
+  onClickCategory(categoryId: number, categoryName: string): void {
+    console.log('Clicked on category:', categoryName);
+    this.router.navigate(['/gallery', categoryId]);
   }
 }

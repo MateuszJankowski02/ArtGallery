@@ -1,7 +1,7 @@
 <div class="category-wrapper">
     <div
       class="category"
-      (click)="onClickCategory(categoryName)"
+      (click)="onClickCategory(categoryId, categoryName)"
       [ngStyle]="{'background-image': 'url(' + categoryImageURL + ')'}"
       >
         <p>{{ categoryName }}</p>

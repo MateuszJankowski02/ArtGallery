@@ -111,6 +111,14 @@ class ListArtworkBasicAPIView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ArtworkBasicSerializer
     queryset = Artwork.objects.all()
+
+class ListArtworkBasicByCategoryAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ArtworkBasicSerializer
+
+    def get_queryset(self):
+        category_id = self.kwargs.get('category_id')
+        return Artwork.objects.filter(category=category_id)
     
 
 '''
@@ -183,4 +191,6 @@ class CreateUserAPIView(generics.CreateAPIView):
         queryset = User.objects.all()
 
         return queryset
+
+
 

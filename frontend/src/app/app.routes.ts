@@ -6,5 +6,6 @@ import { userAuthGuard } from './core/guards/user-auth.guard';
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'gallery', component: GalleryComponent, canActivate: [userAuthGuard] },
+  { path: 'gallery/:categoryId', component: GalleryComponent, canActivate: [userAuthGuard] },
   { path: '**', redirectTo: '', pathMatch: 'full' }
-];
+]

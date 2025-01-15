@@ -2,6 +2,7 @@
   <div class="categories">
     <app-category
       *ngFor="let category of categories"
+      [categoryId]="category.id"
       [categoryName]="category.name"
       [categoryImageURL]="category.imageURL"
     ></app-category>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { CategoryComponent } from '../category/category.component';
 import { FetchCategoriesService } from '../../services/fetch-categories/fetch-categories.service';
 import { TransliteratePipe } from '../../../../shared/pipes/transliterate.pipe';
@@ -12,17 +13,13 @@ import { TransliteratePipe } from '../../../../shared/pipes/transliterate.pipe';
   styleUrl: './categories.component.scss'
 })
 export class CategoriesComponent implements OnInit {
-  // Array of categories that are objects with a title and an image URL
-  categoryNames: string[] = [];
-  categoryURLs: string[] = [
-
-  ];
-  categories: { name: string, imageURL: string }[] = [];
+  categories: { id: number, name: string, imageURL: string }[] = [];
 
 
   constructor(
     private fetchCategories: FetchCategoriesService,
-    private transliteratePipe: TransliteratePipe
+    private transliteratePipe: TransliteratePipe,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -36,6 +33,7 @@ export class CategoriesComponent implements OnInit {
         this.categories = response.data.results.map((category: any) => {
 
           return {
+            id: category.id,
             name: category.name,
             //converting any space in category name into a floor, all letters to lowercase and all polish letters to english
             imageURL: '/assets/images/' + this.transliteratePipe.transform(category.name) + '.jpg'
@@ -53,4 +51,5 @@ export class CategoriesComponent implements OnInit {
       console.log('An error occurred while fetching categories');
     }
   }
+
 }

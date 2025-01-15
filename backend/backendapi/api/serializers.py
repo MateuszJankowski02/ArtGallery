@@ -126,6 +126,6 @@ class ArtworkBasicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Artwork
-        fields = ['id', 'url', 'tag']
+        fields = ['id', 'url', 'tag', 'category']
 
 

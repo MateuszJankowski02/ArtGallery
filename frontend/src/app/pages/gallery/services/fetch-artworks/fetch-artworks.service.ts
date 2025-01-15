@@ -7,7 +7,8 @@ import axios from 'axios';
 export class FetchArtworksService {
 
   constructor() { }
-  async getArtworks(page: number): Promise<any> {
+
+  async getArtworks(page: number, categoryId?: number): Promise<any> {
     try {
       const token = localStorage.getItem('token');
 
@@ -15,7 +16,11 @@ export class FetchArtworksService {
         throw new Error('Authentication token not found.');
       }
 
-      const response = await axios.get(`http://localhost:8000/api/artworks/basic/?page=${page}`, {
+      const endpoint = categoryId
+        ? `http://localhost:8000/api/artworks/basic/category/${categoryId}/?page=${page}`
+        : `http://localhost:8000/api/artworks/basic/?page=${page}`;
+
+      const response = await axios.get(endpoint, {
         headers: {
           Authorization: `Token ${token}`
         }
