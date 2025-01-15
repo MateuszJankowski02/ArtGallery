@@ -21,6 +21,7 @@ import { LazyLoadImageDirective } from '../../../../shared/directives/lazy-load-
 })
 export class GalleryComponent implements OnInit{
   artworks: BasicArtwork[] = [];
+  selectedImageUrl: string | null = null;
   page: number = 1;
   throttle = 300;
   scrollDistance = 2;
@@ -59,6 +60,14 @@ export class GalleryComponent implements OnInit{
       console.log('Status:', response.status);
     }
     this.loading = false;
+  }
+
+  showFullscreen(artworkUrl: string): void {
+    this.selectedImageUrl = artworkUrl;
+  }
+
+  hideFullscreen(): void {
+    this.selectedImageUrl = null;
   }
 
 }

@@ -13,6 +13,7 @@
       [appLazyLoadImage]="artwork.url"
       alt="{{ artwork.title }}"
       class="gallery-image"
+      (click)="showFullscreen(artwork.url)"
     />
     <div class="title">{{ artwork.title }}</div>
   </div>
@@ -21,5 +22,16 @@
   </div>
   <div class="end-message" *ngIf="allLoaded">
     You have reached the end.
+  </div>
+</div>
+
+<div
+  class="fullscreen-overlay"
+  *ngIf="selectedImageUrl"
+  (click)="hideFullscreen()"
+>
+  <div class="fullscreen-image" (click)="$event.stopPropagation()">
+    <img [src]="selectedImageUrl" alt="Fullscreen artwork" />
+    <button class="close-button" (click)="hideFullscreen()">&times;</button>
   </div>
 </div>

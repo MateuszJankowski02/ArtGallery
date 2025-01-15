@@ -8,6 +8,14 @@ export class LoginUserService {
 
   constructor() { }
 
+  async checkIfUserIdExistsInLocalStorage(userId: string | null): Promise<boolean> {
+    if(userId) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   async loginUser(
     loginUsernameOrEmail: string,
     loginPassword: string
@@ -25,6 +33,10 @@ export class LoginUserService {
         localStorage.setItem('userId', response.data.user_id);
         localStorage.setItem('token', response.data.token);
       }
+      while(!this.checkIfUserIdExistsInLocalStorage(localStorage.getItem('userId'))) {
+        console.log('Waiting for user to be logged in...');
+      }
+
       return response;
 
     } catch (error: any) {
