@@ -2,31 +2,14 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FetchRandomImageService } from '../../../../core/services/fetch-random-image/fetch-random-image.service';
 import { isPlatformBrowser, CommonModule, NgOptimizedImage } from '@angular/common';
 import { Observable, interval, Subscription, forkJoin, of } from 'rxjs';
-import { trigger, transition, style, animate, keyframes } from '@angular/animations';
+import { fadeAnimation } from '../../animations/fade-animation';
 
 @Component({
   selector: 'app-carousel',
   imports: [CommonModule, NgOptimizedImage],
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
-  animations: [
-    trigger('fadeAnimation', [
-      transition(':enter', [
-        animate('1500ms ease-in', keyframes([
-          style({ opacity: 0, offset: 0 }),
-          style({ opacity: 0, offset: 0.7 }),
-          style({ opacity: 1, offset: 1 })
-        ]))
-      ]),
-      transition(':leave', [
-        animate('1500ms ease-out', keyframes([
-          style({ opacity: 1, offset: 0 }),
-          style({ opacity: 1, offset: 0.7 }),
-          style({ opacity: 0, offset: 1 })
-        ]))
-      ])
-    ])
-  ]
+  animations: [fadeAnimation]
 })
 
 export class CarouselComponent implements OnInit{
@@ -46,7 +29,7 @@ export class CarouselComponent implements OnInit{
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.loadRandomURLs();
-      const source = interval(10000);
+      const source = interval(20000);
       this.subscription = source.subscribe(() => this.loadRandomURLs());
     }
   }
@@ -57,7 +40,7 @@ export class CarouselComponent implements OnInit{
 
   private loadRandomURLs(): void {
     const observables = Array.from({ length: this.numberOfURLs }, () =>
-      this.fetchRandomImageService.fetchRandomImageURL(260, 390)
+      this.fetchRandomImageService.fetchRandomImageURL(300, 450)
     );
 
     forkJoin(observables).subscribe(urls => {
