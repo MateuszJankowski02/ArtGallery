@@ -13,12 +13,16 @@ export class MainHeaderComponent {
   constructor(private router: Router) {}
 
   onClickLogout(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
     localStorage.clear();
   }
 
   onClickUserProfile(): void {
     console.log('User profile clicked');
     this.router.navigate(['user_profile']);
+  }
+
+  onClickGallery(): void {
+    this.router.navigate(['gallery']);
   }
 }

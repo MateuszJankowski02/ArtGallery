@@ -10,9 +10,7 @@
 }
 
 .header{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 2em;
@@ -45,7 +43,8 @@
       justify-content: left;
       align-items: center;
       gap: 1em;
-      width: 100%;
+      width: min-width;
+      cursor: pointer;
 
       .header-logo-image{
         width: 3em;
