@@ -5,6 +5,7 @@ urlpatterns = [
     path('artworks/', views.ListCreateArtworkAPIView.as_view(), name='artworks'),
     path('artworks/create/' , views.CreateArtworkAPIView.as_view(), name='create_artwork'),
     path('artworks/basic/', views.ListArtworkBasicAPIView.as_view(), name='basic_artworks'),
+    path('artworks/basic/user/<int:user_id>/', views.ListArtworkBasicByUserAPIView.as_view(), name='artworks_by_user'),
     path('artworks/basic/category/<int:category_id>/', views.ListArtworkBasicByCategoryAPIView.as_view(), name='artworks_by_category'),
     path('artworks/<int:pk>/', views.RetrieveUpdateDestroyArtworkAPIView.as_view(), name='artwork'),
     path('categories/', views.ListCreateCategoryAPIView.as_view(), name='categories'),
