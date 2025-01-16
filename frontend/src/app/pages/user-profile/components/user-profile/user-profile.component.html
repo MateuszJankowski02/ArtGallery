@@ -1,4 +1,4 @@
-<app-main-header />
+<app-main-header></app-main-header>
 <div class="edit-user-profile">
   <h2>Edit Your Profile</h2>
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
@@ -48,7 +48,9 @@
           'invalid-input': editForm.get('confirmPassword')?.invalid && editForm.get('confirmPassword')?.touched,
           'invalid-input-shake': invalidInputShake && editForm.get('confirmPassword')?.invalid
         }">
-      <div *ngIf="editForm.errors?.['notMatching'] && editForm.get('confirmPassword')?.touched" class="error">
+      <div
+        *ngIf="editForm.errors?.['notMatching'] && submitted"
+        class="error">
         Passwords do not match.
       </div>
     </div>
@@ -62,7 +64,11 @@
     </div>
 
     <div class="form-button">
-      <app-button [title]="'Update Profile'" color="button-border-2" type="submit" />
+      <app-button
+        [title]="'Update Profile'"
+        color="button-border-2"
+        type="submit">
+      </app-button>
     </div>
   </form>
 </div>

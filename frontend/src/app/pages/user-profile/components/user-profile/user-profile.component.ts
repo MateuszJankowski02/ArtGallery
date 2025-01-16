@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit {
   errorMessages: string[] = [];
   successMessage: string = '';
   backendResponse: Promise<any> | null = null;
+  submitted: boolean = false;
 
   constructor(
     private fetchUserDetailsService: FetchUserDetailsService,
@@ -71,6 +72,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
+    this.submitted = true;
     this.editForm.markAllAsTouched();
     this.errorMessages = [];
     this.successMessage = '';
@@ -100,32 +102,6 @@ export class UserProfileComponent implements OnInit {
       return;
     }
 
-    /*
-    this.backendResponse.then((response) => {
-        console.log(JSON.stringify(response, null, 2));
-        if(response.status === 200){
-          console.log("Status:", response.status);
-          this.errorMessages = [];
-          this.router.navigate(['/gallery']);
-          return;
-        }
-        if(response.status === 400){
-          console.log("Status:", response.status);
-          this.errorMessages = [];
-          for (const key in response.data) {
-            if (response.data.hasOwnProperty(key)) {
-              console.log(`${key}:`, response.data[key]);
-              this.errorMessages.push(`${response.data[key]}`);
-            }
-          }
-        }
-      }).catch((error) => {
-        console.error(JSON.stringify(error.error ?? error, null, 2));
-        this.errorMessages = [];
-        this.errorMessages.push('An error occurred while trying to log in. Please try again later.');
-      });
-    */
-
     this.backendResponse = this.updateUserDetailsService.updateUserDetails(updatedFields);
 
     this.backendResponse.then((response) => {
@@ -133,6 +109,7 @@ export class UserProfileComponent implements OnInit {
         console.log('Status:', response.status);
         this.successMessage = 'User details updated successfully.';
         this.loadUser();
+        this.submitted = false;
         return;
       }
       if (response.status === 400) {
