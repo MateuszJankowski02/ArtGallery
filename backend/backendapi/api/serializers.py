@@ -65,6 +65,12 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
     
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = User
+        fields = ['id', 'username', 'bio', 'email']
+        read_only_fields = ['id']
+    
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     email = serializers.CharField()

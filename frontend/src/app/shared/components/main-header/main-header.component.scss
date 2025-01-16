@@ -25,6 +25,19 @@
       align-items: center;
       gap: 2em;
       width: 100%;
+
+      .header-user-icon{
+        height: 2.5em;
+        width: auto;
+        cursor: pointer;
+
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
     }
 
     .header-logo{

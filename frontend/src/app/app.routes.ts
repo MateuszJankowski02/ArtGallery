@@ -8,6 +8,6 @@ export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'gallery', component: GalleryComponent, canActivate: [userAuthGuard] },
   { path: 'gallery/:categoryId', component: GalleryComponent, canActivate: [userAuthGuard] },
-  { path: 'gallery/userprofile', component: UserProfileComponent, canActivate: [userAuthGuard] },
+  { path: 'user_profile', component: UserProfileComponent, canActivate: [userAuthGuard] },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ]

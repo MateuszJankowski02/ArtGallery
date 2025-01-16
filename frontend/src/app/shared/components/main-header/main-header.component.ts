@@ -16,4 +16,9 @@ export class MainHeaderComponent {
     this.router.navigate(['/']);
     localStorage.clear();
   }
+
+  onClickUserProfile(): void {
+    console.log('User profile clicked');
+    this.router.navigate(['user_profile']);
+  }
 }
