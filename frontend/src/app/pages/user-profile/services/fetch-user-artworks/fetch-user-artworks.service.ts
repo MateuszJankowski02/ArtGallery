@@ -4,21 +4,21 @@ import axios from 'axios';
 @Injectable({
   providedIn: 'root'
 })
-export class FetchArtworksService {
+export class FetchUserArtworksService {
 
+  
   constructor() { }
 
-  async getArtworks(page: number = 1, categoryId?: number): Promise<any> {
+  async getArtworks(page: number = 1): Promise<any> {
     try {
       const token = localStorage.getItem('token');
+      const userId = localStorage.getItem('userId');
 
       if (!token) {
         throw new Error('Authentication token not found.');
       }
 
-      const endpoint = categoryId
-        ? `http://localhost:8000/api/artworks/basic/category/${categoryId}/?page=${page}`
-        : `http://localhost:8000/api/artworks/basic/?page=${page}`;
+      const endpoint = `http://localhost:8000/api/artworks/basic/user/${userId}/?page=${page}`;
 
       const response = await axios.get(endpoint, {
         headers: {
