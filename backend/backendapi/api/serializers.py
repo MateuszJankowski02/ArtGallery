@@ -70,6 +70,42 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'bio', 'email']
         read_only_fields = ['id']
+
+class UserProfilePatchSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(
+        required=False,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+    email = serializers.EmailField(
+        required=False,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+    bio = serializers.CharField(required=False)
+    password = serializers.CharField(write_only=True, required=False)
+    current_password = serializers.CharField(write_only=True, required=False)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'bio', 'password', 'current_password']
+
+    def validate(self, attrs):
+        if 'password' in attrs:
+            if 'current_password' not in attrs:
+                raise serializers.ValidationError({"current_password": "This field is required to change the password."})
+            user = self.context['request'].user
+            if not user.check_password(attrs['current_password']):
+                raise serializers.ValidationError({"current_password": "Current password is incorrect."})
+        return attrs
+
+    def update(self, instance, validated_data):
+        instance.username = validated_data.get('username', instance.username)
+        instance.email = validated_data.get('email', instance.email)
+        instance.bio = validated_data.get('bio', instance.bio)
+        password = validated_data.get('password', None)
+        if password:
+            instance.set_password(password)
+        instance.save()
+        return instance
     
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField()

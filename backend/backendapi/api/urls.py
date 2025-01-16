@@ -18,4 +18,5 @@ urlpatterns = [
     path('users/create/', views.CreateUserAPIView.as_view(), name='create_user'),
     path('users/login/', views.LoginUserAPIView.as_view(), name='login_user'),
     path('users/profile/<int:pk>/', views.RetrieveUserProfileAPIView.as_view(), name='user'),
+    path('users/profile/update/<int:pk>/', views.UpdateUserProfileAPIView.as_view(), name='update_user_profile'),
 ]

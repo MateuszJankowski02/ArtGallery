@@ -204,3 +204,18 @@ class RetrieveUserProfileAPIView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserProfileSerializer
     queryset = User.objects.all()
+
+
+'''
+
+Patch User Profile API View
+
+'''
+
+class UpdateUserProfileAPIView(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserProfilePatchSerializer
+    queryset = User.objects.all()
+
+    def get_serializer_context(self):
+        return {'request': self.request}
