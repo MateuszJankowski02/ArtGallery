@@ -90,10 +90,9 @@ class UserProfilePatchSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         if 'password' in attrs:
-            if 'current_password' not in attrs:
-                raise serializers.ValidationError({"current_password": "This field is required to change the password."})
-            user = self.context['request'].user
-            if not user.check_password(attrs['current_password']):
+            if not attrs.get('current_password'):
+                raise serializers.ValidationError({"current_password": "Current password is required to set a new password."})
+            if not self.instance.check_password(attrs['current_password']):
                 raise serializers.ValidationError({"current_password": "Current password is incorrect."})
         return attrs
 

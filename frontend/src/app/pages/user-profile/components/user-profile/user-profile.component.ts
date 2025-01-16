@@ -35,6 +35,7 @@ export class UserProfileComponent implements OnInit {
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl(''),
+      current_password: new FormControl(''),
       confirmPassword: new FormControl('')
     }, { validators: this.passwordMatchValidator });
   }
@@ -60,6 +61,7 @@ export class UserProfileComponent implements OnInit {
         username: this.user.username,
         email: this.user.email,
         password: '',
+        current_password: '',
         confirmPassword: ''
       });
 
@@ -94,7 +96,7 @@ export class UserProfileComponent implements OnInit {
     }
     if (formValues.password) { // If password is provided
       updatedFields.password = formValues.password;
-      updatedFields.current_password = formValues.currentPassword;
+      updatedFields.current_password = formValues.current_password;
     }
 
     if (Object.keys(updatedFields).length === 0) {
@@ -124,7 +126,7 @@ export class UserProfileComponent implements OnInit {
     }).catch((error) => {
       console.error(JSON.stringify(error.error ?? error, null, 2));
       this.errorMessages = [];
-      this.errorMessages.push('An error occurred while trying to log in. Please try again later.');
+      this.errorMessages.push('An error occurred while trying to update your profile. Please try again later.');
     });
   }
 

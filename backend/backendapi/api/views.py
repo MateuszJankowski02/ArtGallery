@@ -212,7 +212,7 @@ Patch User Profile API View
 
 '''
 
-class UpdateUserProfileAPIView(generics.UpdateAPIView):
+class UpdateUserProfileAPIView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserProfilePatchSerializer
     queryset = User.objects.all()

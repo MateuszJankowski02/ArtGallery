@@ -2,6 +2,7 @@
 <div class="edit-user-profile">
   <h2>Edit Your Profile</h2>
   <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <!-- Username Field -->
     <div class="form-group">
       <label for="username">Username:</label>
       <input
@@ -14,6 +15,7 @@
         }">
     </div>
 
+    <!-- Email Field -->
     <div class="form-group">
       <label for="email">Email:</label>
       <input
@@ -26,6 +28,20 @@
         }">
     </div>
 
+    <!-- Current Password Field -->
+    <div class="form-group">
+      <label for="currentPassword">Current Password:</label>
+      <input
+        id="currentPassword"
+        type="password"
+        formControlName="current_password"
+        [ngClass]="{
+          'invalid-input': editForm.get('current_password')?.invalid && editForm.get('current_password')?.touched,
+          'invalid-input-shake': invalidInputShake && editForm.get('current_password')?.invalid
+        }">
+    </div>
+
+    <!-- New Password Field -->
     <div class="form-group">
       <label for="password">New Password:</label>
       <input
@@ -38,6 +54,9 @@
         }">
     </div>
 
+
+
+    <!-- Confirm New Password Field -->
     <div class="form-group">
       <label for="confirmPassword">Confirm New Password:</label>
       <input
@@ -55,14 +74,17 @@
       </div>
     </div>
 
+    <!-- Error Messages -->
     <div *ngIf="errorMessages.length > 0" class="form-errors">
       <div *ngFor="let error of errorMessages">{{ error }}</div>
     </div>
 
+    <!-- Success Message -->
     <div *ngIf="successMessage" class="success-message">
       {{ successMessage }}
     </div>
 
+    <!-- Submit Button -->
     <div class="form-button">
       <app-button
         [title]="'Update Profile'"

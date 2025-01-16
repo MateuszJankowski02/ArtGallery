@@ -26,7 +26,16 @@ export class UpdateUserDetailsService {
       return response;
 
     } catch (error: any) {
-      throw error;
+      if (error.response) {
+        console.error('Validation Error:', error.response);
+        return error.response;
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+        return error.request;
+      } else {
+        console.error('Error:', error.message);
+        return error.message;
+      }
     }
   }
 }
