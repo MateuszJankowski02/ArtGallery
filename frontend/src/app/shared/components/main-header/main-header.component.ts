@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgOptimizedImage, CommonModule } from '@angular/common';
 import { ButtonComponent } from "../button/button.component";
 import { Router } from '@angular/router';
@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
   styleUrl: './main-header.component.scss'
 })
 export class MainHeaderComponent {
+  @Input() username: string = '';
+
   constructor(private router: Router) {}
 
   onClickLogout(): void {

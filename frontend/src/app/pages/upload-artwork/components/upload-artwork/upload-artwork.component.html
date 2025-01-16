@@ -1,0 +1,56 @@
+<app-main-header />
+<div class="upload-artwork">
+    <h2>Upload a New Artwork</h2>
+    <form [formGroup]="addArtworkForm" (ngSubmit)="onSubmit()">
+
+      <!-- Title field -->
+
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input id="title" type="text" formControlName="title" />
+      </div>
+
+      <!-- Description field -->
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" formControlName="description"></textarea>
+      </div>
+
+      <!-- URL field -->
+
+      <div class="form-group">
+        <label for="url">Image URL:</label>
+        <input id="url" type="text" formControlName="url" />
+      </div>
+
+      <!-- Category field -->
+
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select id="category" formControlName="category" multiple>
+          <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+        </select>
+      </div>
+
+      <!-- Error Messages -->
+    <div *ngIf="errorMessages.length > 0" class="form-errors">
+        <div *ngFor="let error of errorMessages">{{ error }}</div>
+      </div>
+  
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+
+      <!-- Submit Button -->
+
+      <div class="form-button">
+        <app-button
+          [title]="'Upload Artwork'"
+          color="button-border-2"
+          type="submit">
+        </app-button>
+      </div>
+    </form>
+  </div>

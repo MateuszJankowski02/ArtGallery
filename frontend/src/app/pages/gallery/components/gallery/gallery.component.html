@@ -1,6 +1,14 @@
 <app-main-header />
 <app-categories />
 
+<div class="gallery-upload-artwork-button">
+  <app-button
+    [title]="'Upload Artwork'"
+    color="button-border-2"
+    (click)="onClickUploadArtwork()"
+  ></app-button>
+</div>
+
 <div
   class="gallery"
   infiniteScroll

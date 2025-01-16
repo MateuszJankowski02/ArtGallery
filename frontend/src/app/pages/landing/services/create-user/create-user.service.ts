@@ -7,6 +7,7 @@ import axios, { AxiosResponse } from 'axios';
 export class CreateUserService {
 
   constructor(){}
+  
   async createNewUser(
     registerUsername: string,
     registerEmail: string,

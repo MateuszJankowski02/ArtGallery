@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MainHeaderComponent } from '../../../../shared/components/main-header/main-header.component';
 import { CategoriesComponent } from '../categories/categories.component';
 import { BasicArtwork } from '../../interfaces/BasicArtwork';
 import { FetchArtworksService } from '../../services/fetch-artworks/fetch-artworks.service';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { LazyLoadImageDirective } from '../../../../shared/directives/lazy-load-image/lazy-load-image.directive';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+
 
 @Component({
   selector: 'app-gallery',
@@ -15,7 +17,8 @@ import { LazyLoadImageDirective } from '../../../../shared/directives/lazy-load-
     CategoriesComponent,
     InfiniteScrollDirective,
     LazyLoadImageDirective,
-    CommonModule
+    CommonModule,
+    ButtonComponent
   ],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss'
@@ -32,7 +35,8 @@ export class GalleryComponent implements OnInit{
 
   constructor(
     private fetchArtworksService: FetchArtworksService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +89,10 @@ export class GalleryComponent implements OnInit{
 
   hideFullscreen(): void {
     this.selectedImageUrl = null;
+  }
+
+  onClickUploadArtwork(): void {
+    this.router.navigate(['/upload_artwork']);
   }
 
 }

@@ -1,0 +1,78 @@
+@use "../../../../../../public/styles/abstracts/" as *;
+
+.upload-artwork {
+  max-width: 400px;
+  margin: 2em auto;
+  padding: 1em;
+  background-color: $background-color;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1em;
+    font-family: 'Geraldine', sans-serif;
+    font-size: 1.5em;
+    color: $primary-color;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+
+    label {
+      margin-bottom: 0.5em;
+      font-weight: 500;
+    }
+
+    input,
+    textarea,
+    select {
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: border-color 0.3s;
+      color: #000;
+
+      option {
+        color: #000;
+      }
+    }
+  }
+
+  .form-errors {
+    background-color: #ffe6e6;
+    border: 1px solid red;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    
+    div {
+      color: red;
+    }
+  }
+
+  .success-message {
+    background-color: #e6ffe6;
+    border: 1px solid green;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    color: green;
+    text-align: center;
+  }
+
+  .form-button {
+    text-align: center;
+
+    button {
+      cursor: pointer;
+      padding: 0.5em 1em;
+      border-radius: 5px;
+      background-color: $primary-color;
+      color: #fff;
+      border: none;
+    }
+  }
+}

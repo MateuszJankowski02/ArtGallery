@@ -15,6 +15,10 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ArtworkSerializer(serializers.ModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(many=True, queryset=Category.objects.all())
+    tag = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
+    collection = serializers.PrimaryKeyRelatedField(many=True, queryset=Collection.objects.all())
+
     class Meta:
         model = Artwork
         fields = '__all__'
@@ -170,3 +174,28 @@ class ArtworkBasicSerializer(serializers.ModelSerializer):
         fields = ['id', 'url', 'tag', 'category']
 
 
+class ArtworkCreateSerializer(serializers.ModelSerializer):
+    category = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Category.objects.all()
+    )
+    tag = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Tag.objects.all(), required=False
+    )
+    collection = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Collection.objects.all(), required=False
+    )
+
+    class Meta:
+        model = Artwork
+        fields = ['id', 'title', 'description', 'url', 'category', 'tag', 'collection', 'created_at', 'updated_at']
+        read_only_fields = ['created_at', 'updated_at']
+
+    def create(self, validated_data):
+        categories = validated_data.pop('category')
+        tags = validated_data.pop('tag', [])
+        collections = validated_data.pop('collection', [])
+        artwork = Artwork.objects.create(**validated_data)
+        artwork.category.set(categories)
+        artwork.tag.set(tags)
+        artwork.collection.set(collections)
+        return artwork

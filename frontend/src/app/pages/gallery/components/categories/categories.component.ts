@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CategoryComponent } from '../category/category.component';
-import { FetchCategoriesService } from '../../services/fetch-categories/fetch-categories.service';
+import { FetchCategoriesService } from '../../../../core/services/fetch-categories/fetch-categories.service';
 import { TransliteratePipe } from '../../../../shared/pipes/transliterate.pipe';
 
 

@@ -219,3 +219,23 @@ class UpdateUserProfileAPIView(generics.RetrieveUpdateAPIView):
 
     def get_serializer_context(self):
         return {'request': self.request}
+
+
+'''
+
+Create Artwork API View
+
+'''
+
+class CreateArtworkAPIView(generics.CreateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ArtworkCreateSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        return Artwork.objects.all()
+
+    def get_serializer_context(self):
+        return {'request': self.request}
