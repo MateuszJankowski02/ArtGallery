@@ -1,3 +1,4 @@
+import { FetchUserArtworksService } from './../../services/fetch-user-artworks/fetch-user-artworks.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, Validators, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
@@ -6,6 +7,7 @@ import { FetchUserDetailsService } from '../../services/fetch-user-details/fetch
 import { User } from '../../interfaces/User';
 import { UpdateUserDetailsService } from '../../services/update-user-details/update-user-details.service';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { BasicArtwork } from '../../../../shared/interfaces/BasicArtwork';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,12 +16,12 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
   styleUrl: './user-profile.component.scss'
 })
 export class UserProfileComponent implements OnInit {
+  artworks: BasicArtwork[] = [];
   user: User = {
     username: '',
     bio: '',
     email: ''
   };
-
   editForm: FormGroup;
   invalidInputShake: boolean = false;
   errorMessages: string[] = [];
@@ -28,6 +30,7 @@ export class UserProfileComponent implements OnInit {
   submitted: boolean = false;
 
   constructor(
+    private fetchUserArtworksService: FetchUserArtworksService,
     private fetchUserDetailsService: FetchUserDetailsService,
     private updateUserDetailsService: UpdateUserDetailsService
   ) {
@@ -72,6 +75,7 @@ export class UserProfileComponent implements OnInit {
       console.log('Status:', response.status);
     }
   }
+
 
   async onSubmit(): Promise<void> {
     this.submitted = true;
