@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadArtworkComponent } from './upload-artwork.component';
+import { ArtworksComponent } from './artworks.component';
 
-describe('UploadArtworkComponent', () => {
-  let component: UploadArtworkComponent;
-  let fixture: ComponentFixture<UploadArtworkComponent>;
+describe('ArtworksComponent', () => {
+  let component: ArtworksComponent;
+  let fixture: ComponentFixture<ArtworksComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UploadArtworkComponent]
+      imports: [ArtworksComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UploadArtworkComponent);
+    fixture = TestBed.createComponent(ArtworksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

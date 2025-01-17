@@ -1,4 +1,4 @@
-import { FetchUserArtworksService } from './../../services/fetch-user-artworks/fetch-user-artworks.service';
+import { FetchUserArtworksService } from '../../../../shared/services/fetch-artworks-by-user/fetch-user-artworks-by-user.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, Validators, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';

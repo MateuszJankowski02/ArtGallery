@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MainHeaderComponent } from '../../../../shared/components/main-header/main-header.component';
-import { FetchCategoriesService } from '../../../../core/services/fetch-categories/fetch-categories.service';
+import { FetchCategoriesService } from '../../../../shared/services/fetch-categories/fetch-categories.service';
 import { UploadArtworkService } from '../../services/upload-artwork/upload-artwork.service';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 

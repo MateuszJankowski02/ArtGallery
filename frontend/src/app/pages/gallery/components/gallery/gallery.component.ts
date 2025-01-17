@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MainHeaderComponent } from '../../../../shared/components/main-header/main-header.component';
 import { CategoriesComponent } from '../categories/categories.component';
-import { BasicArtwork } from '../../interfaces/BasicArtwork';
-import { FetchArtworksService } from '../../services/fetch-artworks/fetch-artworks.service';
-import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { LazyLoadImageDirective } from '../../../../shared/directives/lazy-load-image/lazy-load-image.directive';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 
@@ -15,7 +12,6 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
   imports: [
     MainHeaderComponent,
     CategoriesComponent,
-    InfiniteScrollDirective,
     LazyLoadImageDirective,
     CommonModule,
     ButtonComponent
