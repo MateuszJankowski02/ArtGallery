@@ -1,4 +1,4 @@
-import { FetchUserArtworksService } from '../../../../shared/services/fetch-artworks-by-user/fetch-user-artworks-by-user.service';
+import { FetchArtworksService } from '../../../../shared/services/fetch-artworks/fetch-artworks.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, Validators, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +30,7 @@ export class UserProfileComponent implements OnInit {
   submitted: boolean = false;
 
   constructor(
-    private fetchUserArtworksService: FetchUserArtworksService,
+    private fetchArtworksService: FetchArtworksService,
     private fetchUserDetailsService: FetchUserDetailsService,
     private updateUserDetailsService: UpdateUserDetailsService
   ) {

@@ -8,7 +8,11 @@ import { LazyLoadImageDirective } from '../../../directives/lazy-load-image/lazy
 
 @Component({
   selector: 'app-artworks',
-  imports: [],
+  imports: [
+    CommonModule,
+    InfiniteScrollDirective,
+    LazyLoadImageDirective
+  ],
   templateUrl: './artworks.component.html',
   styleUrl: './artworks.component.scss'
 })
@@ -22,7 +26,6 @@ export class ArtworksComponent {
   scrollDistance = 2;
   loading: boolean = false;
   allLoaded: boolean = false;
-  //categoryId: number | null = null;
 
 
   constructor(private fetchArtworksService: FetchArtworksService) {}
@@ -34,11 +37,19 @@ export class ArtworksComponent {
   async loadArtworks(): Promise<void> {
     this.loading = true;
 
-    const response = await this.fetchArtworksService.getArtworks(this.page, this.categoryId || undefined);
+    let response;
+
+    if(this.showUserArtworks){
+      response = await this.fetchArtworksService.getArtworksByUser(this.page);
+    }else if(this.categoryId){
+      response = await this.fetchArtworksService.getArtworksByCategory(this.page, this.categoryId);
+    }else{
+      response = await this.fetchArtworksService.getArtworks(this.page);
+    }
 
     if (response.status === 200) {
-      console.log('Artworks fetched successfully:', response.data);
-      console.log('Status:', response.status);
+      //console.log('Artworks fetched successfully:', response.data);
+      //console.log('Status:', response.status);
       this.artworks = [...this.artworks, ...response.data.results];
       if (!response.data.next){
         this.allLoaded = true;
