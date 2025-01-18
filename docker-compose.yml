@@ -1,16 +1,25 @@
 version: '3.8'
 
 services:
-  app:
+  frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"  # Django
-      - "4200:4200"  # Angular
+      - "4200:4200"
     volumes:
-      - ./backend:/app/backend  # Kod Django
-      - ./frontend:/app/frontend  # Kod Angular
+      - ./frontend:/frontend
+    depends_on:
+      - db
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/backend
     depends_on:
       - db
     environment:
