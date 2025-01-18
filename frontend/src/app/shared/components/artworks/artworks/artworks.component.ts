@@ -1,10 +1,9 @@
 import { FetchArtworksService } from '../../../services/fetch-artworks/fetch-artworks.service';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BasicArtwork } from '../../../interfaces/BasicArtwork';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { LazyLoadImageDirective } from '../../../directives/lazy-load-image/lazy-load-image.directive';
-
 
 @Component({
   selector: 'app-artworks',
@@ -16,7 +15,7 @@ import { LazyLoadImageDirective } from '../../../directives/lazy-load-image/lazy
   templateUrl: './artworks.component.html',
   styleUrl: './artworks.component.scss'
 })
-export class ArtworksComponent {
+export class ArtworksComponent implements OnInit, OnChanges {
   @Input() categoryId: number | null = null;
   @Input() showUserArtworks: boolean = false;
   artworks: BasicArtwork[] = [];
@@ -32,6 +31,13 @@ export class ArtworksComponent {
 
   ngOnInit(): void {
     this.loadArtworks();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['categoryId'] && !changes['categoryId'].firstChange) {
+      this.resetGallery();
+      this.loadArtworks();
+    }
   }
 
   async loadArtworks(): Promise<void> {
