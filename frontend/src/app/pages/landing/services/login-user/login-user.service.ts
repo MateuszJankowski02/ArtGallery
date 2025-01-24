@@ -31,6 +31,7 @@ export class LoginUserService {
         console.log('User logged in successfully:', response.data);
         console.log('Status:', response.status);
         localStorage.setItem('userId', response.data.user_id);
+        localStorage.setItem('username', response.data.username);
         localStorage.setItem('token', response.data.token);
       }
       while(!this.checkIfUserIdExistsInLocalStorage(localStorage.getItem('userId'))) {

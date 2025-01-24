@@ -26,8 +26,8 @@
   *ngIf="selectedImageUrl"
   (click)="hideFullscreen()"
 >
-  <div class="fullscreen-image" (click)="$event.stopPropagation()">
-    <img [src]="selectedImageUrl" alt="Fullscreen artwork" />
+  <div class="fullscreen-image-container" (click)="$event.stopPropagation()">
+    <img class="fullscreen-image" [src]="selectedImageUrl" alt="Fullscreen artwork" />
     <button class="close-button" (click)="hideFullscreen()">&times;</button>
   </div>
 </div>

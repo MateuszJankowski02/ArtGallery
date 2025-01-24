@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './main-header.component.scss'
 })
 export class MainHeaderComponent {
-  @Input() username: string = '';
+  username: string = localStorage.getItem('username') || '';
 
   constructor(private router: Router) {}
 
