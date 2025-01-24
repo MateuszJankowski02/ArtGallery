@@ -8,10 +8,17 @@ import { User } from '../../interfaces/User';
 import { UpdateUserDetailsService } from '../../services/update-user-details/update-user-details.service';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { BasicArtwork } from '../../../../shared/interfaces/BasicArtwork';
+import { ArtworksComponent } from '../../../../shared/components/artworks/artworks/artworks.component';
 
 @Component({
   selector: 'app-user-profile',
-  imports: [MainHeaderComponent, CommonModule, ReactiveFormsModule, ButtonComponent],
+  imports: [
+    MainHeaderComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonComponent,
+    ArtworksComponent
+  ],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.scss'
 })
