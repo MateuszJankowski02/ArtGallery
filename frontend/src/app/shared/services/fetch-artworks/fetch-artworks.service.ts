@@ -72,7 +72,6 @@ export class FetchArtworksService {
 
   async getArtworksByCategory(page: number = 1, categoryId: number): Promise<any> {
 
-
     try {
       const token = localStorage.getItem('token');
 
@@ -81,6 +80,36 @@ export class FetchArtworksService {
       }
 
       const endpoint = `http://localhost:8000/api/artworks/basic/category/${categoryId}/?page=${page}`
+
+      const response = await axios.get(endpoint, {
+        headers: {
+          Authorization: `Token ${token}`
+        }
+      });
+
+      return response;
+
+    }catch (error: any) {
+      if (error.response) {
+        console.error('Validation Error:', error.response);
+        return error.response;
+      } else if (error.request) {
+        console.error('No response received:', error.request);
+      } else {
+        console.error('Error:', error.message);
+      }
+    }
+  }
+
+  async deleteArtwork(artworkId: number): Promise<any> {
+    try {
+      const token = localStorage.getItem('token');
+
+      if (!token) {
+        throw new Error('Authentication token not found.');
+      }
+
+      const endpoint = `http://localhost:8000/api/artworks/delete/${artworkId}/`;
 
       const response = await axios.get(endpoint, {
         headers: {

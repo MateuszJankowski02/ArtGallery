@@ -1,5 +1,5 @@
 export interface BasicArtwork {
-  id: string;
+  id: number;
   title: string;
   url: string;
 }

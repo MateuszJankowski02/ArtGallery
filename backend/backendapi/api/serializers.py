@@ -199,3 +199,8 @@ class ArtworkCreateSerializer(serializers.ModelSerializer):
         artwork.tag.set(tags)
         artwork.collection.set(collections)
         return artwork
+
+class ArtworkDeleteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artwork
+        fields = []

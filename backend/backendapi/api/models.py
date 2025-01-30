@@ -60,7 +60,7 @@ class Artwork(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    url = models.URLField()
+    url = models.URLField(max_length=500)
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, through='ArtworkCategory', related_name='artwork_categories')
     created_at = models.DateTimeField(auto_now_add=True, editable=False)

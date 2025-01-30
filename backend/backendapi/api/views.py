@@ -246,3 +246,8 @@ class CreateArtworkAPIView(generics.CreateAPIView):
 
     def get_serializer_context(self):
         return {'request': self.request}
+    
+class ArtworkDeleteAPIView(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ArtworkDeleteSerializer
+    queryset = Artwork.objects.all()
