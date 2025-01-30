@@ -5,7 +5,6 @@ import { BasicArtwork } from '../../../interfaces/BasicArtwork';
 import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 import { LazyLoadImageDirective } from '../../../directives/lazy-load-image/lazy-load-image.directive';
 
-
 @Component({
   selector: 'app-artworks',
   imports: [
