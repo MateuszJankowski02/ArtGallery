@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../../environments/environment';
 import axios, { AxiosResponse } from 'axios';
 
 @Injectable({
@@ -19,7 +20,7 @@ export class UploadArtworkService {
       const token = localStorage.getItem('token');
 
       const response: AxiosResponse = await axios.post(
-        'http://localhost:8000/api/artworks/create/',
+        `${environment.apiUrl}/artworks/create/`,
         {
           title: artworkTitle,
           description: artworkDescription,

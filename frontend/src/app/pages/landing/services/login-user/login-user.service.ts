@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../../environments/environment';
 import axios from 'axios';
 
 @Injectable({
@@ -21,7 +22,7 @@ export class LoginUserService {
     loginPassword: string
   ): Promise<any> {
     try {
-      const response = await axios.post('http://localhost:8000/api/users/login/', {
+      const response = await axios.post(`${environment.apiUrl}/users/login/`, {
         username: loginUsernameOrEmail,
         email: loginUsernameOrEmail,
         password: loginPassword

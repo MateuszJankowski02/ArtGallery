@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-lvnwa-^t263-pv@3=s$38)_&8+m6j^f_^8=#$wu@%l3wdkrj7p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'funkybloom.site',
+    '192.168.1.115',
+    'localhost'
+]
 
 
 # Application definition
@@ -45,14 +49,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'backendapi.urls'
@@ -148,6 +153,9 @@ AUTH_USER_MODEL = 'api.User'
 # CORS
 
 CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:4200',
+    'http://funkybloom.site',
+    'http://192.168.1.115'
 ]

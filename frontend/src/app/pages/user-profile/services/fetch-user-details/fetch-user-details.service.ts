@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../../environments/environment';
 import axios from 'axios';
 
 @Injectable({
@@ -17,7 +18,7 @@ export class FetchUserDetailsService {
         throw new Error('Authentication token not found.');
       }
 
-      const response = await axios.get(`http://localhost:8000/api/users/profile/${userId}/`, {
+      const response = await axios.get(`${environment.apiUrl}/users/profile/${userId}/`, {
         headers: {
           Authorization: `Token ${token}`
         }

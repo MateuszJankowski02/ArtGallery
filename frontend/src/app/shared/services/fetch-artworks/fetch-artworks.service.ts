@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 import axios from 'axios';
 
 @Injectable({
@@ -16,7 +17,7 @@ export class FetchArtworksService {
         throw new Error('Authentication token not found.');
       }
 
-      const endpoint = `http://localhost:8000/api/artworks/basic/?page=${page}`;
+      const endpoint = `${environment.apiUrl}/artworks/basic/?page=${page}`;
 
       const response = await axios.get(endpoint, {
         headers: {
@@ -47,7 +48,7 @@ export class FetchArtworksService {
         throw new Error('Authentication token not found.');
       }
 
-      const endpoint = `http://localhost:8000/api/artworks/basic/user/${userId}/?page=${page}`;
+      const endpoint = `${environment.apiUrl}/artworks/basic/user/${userId}/?page=${page}`;
 
       const response = await axios.get(endpoint, {
         headers: {
@@ -79,7 +80,7 @@ export class FetchArtworksService {
         throw new Error('Authentication token not found.');
       }
 
-      const endpoint = `http://localhost:8000/api/artworks/basic/category/${categoryId}/?page=${page}`
+      const endpoint = `${environment.apiUrl}/artworks/basic/category/${categoryId}/?page=${page}`
 
       const response = await axios.get(endpoint, {
         headers: {
@@ -109,7 +110,7 @@ export class FetchArtworksService {
         throw new Error('Authentication token not found.');
       }
 
-      const endpoint = `http://localhost:8000/api/artworks/delete/${artworkId}/`;
+      const endpoint = `${environment.apiUrl}/artworks/delete/${artworkId}/`;
 
       const response = await axios.get(endpoint, {
         headers: {

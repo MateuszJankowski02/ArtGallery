@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../../environments/environment';
 import axios, { AxiosResponse } from 'axios';
 
 @Injectable({
@@ -17,7 +18,7 @@ export class UpdateUserDetailsService {
         throw new Error('Authentication token not found.');
       }
 
-      const response = await axios.patch(`http://localhost:8000/api/users/profile/update/${userId}/`, data, {
+      const response = await axios.patch(`${environment.apiUrl}/users/profile/update/${userId}/`, data, {
         headers: {
           Authorization: `Token ${token}`
         }

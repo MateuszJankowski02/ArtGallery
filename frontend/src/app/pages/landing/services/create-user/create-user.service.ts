@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../../environments/environment';
 import axios, { AxiosResponse } from 'axios';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class CreateUserService {
   ): Promise<any> {
     try {
 
-      const response: AxiosResponse = await axios.post('http://localhost:8000/api/users/create/', {
+      const response: AxiosResponse = await axios.post(`${environment.apiUrl}/users/create/`, {
         username: registerUsername,
         email: registerEmail,
         password: registerPassword,
