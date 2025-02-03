@@ -38,6 +38,9 @@ frontend/.vscode/*
 .env
 .env.*
 
+# Secret files
+secrets/*
+
 # Logs
 logs/
 *.log

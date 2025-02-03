@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    image: artgallery_backend:dev
+    environment:
+      - DJANGO_SECRET_KEY=/run/secrets/django_secret_key
+      - POSTGRES_DB=/run/secrets/postgres_db
+      - POSTGRES_USER=/run/secrets/postgres_user
+      - POSTGRES_PASSWORD=/run/secrets/postgres_password
+    secrets:
+      - django_secret_key
+      - postgres_db
+      - postgres_user
+      - postgres_password
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/backend  # Kod Django
+    depends_on:
+      - db
+    networks:
+      - artgallery_net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    image: artgallery_frontend:dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/frontend  # Kod Angular
+    depends_on:
+      - backend
+    networks:
+      - artgallery_net
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB_FILE=/run/secrets/postgres_db
+      - POSTGRES_USER_FILE=/run/secrets/postgres_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
+    secrets:
+      - postgres_db
+      - postgres_user
+      - postgres_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - artgallery_net
+
+secrets:
+  django_secret_key:
+    file: ./secrets/django_secret_key.txt
+  postgres_db:
+    file: ./secrets/postgres_db.txt
+  postgres_user:
+    file: ./secrets/postgres_user.txt
+  postgres_password:
+    file: ./secrets/postgres_password.txt
+
+volumes:
+  postgres_data:
+
+networks:
+  artgallery_net:
+    driver: overlay
+    attachable: true
+

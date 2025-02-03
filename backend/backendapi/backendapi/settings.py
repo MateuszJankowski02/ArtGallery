@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+def get_secret(secret_path, default=None):
+    try:
+        with open(secret_path) as f:
+            return f.read().strip()
+    except IOError:
+        return default
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lvnwa-^t263-pv@3=s$38)_&8+m6j^f_^8=#$wu@%l3wdkrj7p'
+SECRET_KEY = get_secret('/run/secrets/django_secret_key', '&ej3&(3f!6gk48d=*&)bh6!ks6sa$dt02+9x#1r3%so%tgg__e')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -98,9 +105,9 @@ WSGI_APPLICATION = 'backendapi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'appdatabase',
-        'USER': 'appuser',
-        'PASSWORD': 'admin',
+        'NAME': get_secret('/run/secrets/postgres_db', 'appdatabase'),
+        'USER': get_secret('/run/secrets/postgres_user', 'appuser'),
+        'PASSWORD': get_secret('/run/secrets/postgres_password', 'admin'),
         'HOST': 'db',
         'PORT': '5432',
     }
