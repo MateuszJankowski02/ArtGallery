@@ -7,10 +7,7 @@ services:
       dockerfile: Dockerfile.dev
     image: artgallery_backend:dev
     environment:
-      - DJANGO_SECRET_KEY=/run/secrets/django_secret_key
-      - POSTGRES_DB=/run/secrets/postgres_db
-      - POSTGRES_USER=/run/secrets/postgres_user
-      - POSTGRES_PASSWORD=/run/secrets/postgres_password
+      - DJANGO_DEBUG_ON=True
     secrets:
       - django_secret_key
       - postgres_db

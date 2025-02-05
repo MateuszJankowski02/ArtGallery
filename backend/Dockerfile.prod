@@ -1,37 +1,29 @@
-FROM ubuntu:22.04
+FROM python:3.10-slim
 
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-pip \
     libpq-dev \
-    curl \
     gnupg \
+    build-essential \
+    gcc \
     cmake \
     pkg-config \
-    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get clean \
+    autoconf \
+    automake \
     && rm -rf /var/lib/apt/lists/*
 
 ENV MESON_SKIP_TESTS=1
 
-WORKDIR /app
+WORKDIR /backend
 
-COPY backend/ /app/backend
+COPY ./requirements.txt ./requirements.txt
+RUN pip install --upgrade pip \
+    && pip install gunicorn==20.1.0 \
+    && pip install -r requirements.txt
+    
 
-WORKDIR /app/backend
-COPY backend/requirements.txt /app/backend/requirements.txt
-RUN pip3 install --upgrade pip
-RUN pip3 install -r requirements.txt
+COPY . .
 
-WORKDIR /app
-RUN npm install -g @angular/cli
+WORKDIR /backend/backendapi
 
-COPY frontend/ /app/frontend
-WORKDIR /app/frontend
-RUN npm install
-
-EXPOSE 8000 4200
-
-CMD ["bash", "-c", "cd /app/backend/backendapi && python3 manage.py runserver 0.0.0.0:8000 & cd /app/frontend && ng serve --host 0.0.0.0 --port 4200"]
-
+# Use Gunicorn with a sample worker count and sync worker class.
+CMD ["gunicorn", "backendapi.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--worker-class", "sync"]

@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = get_secret('/run/secrets/django_secret_key', '&ej3&(3f!6gk48d=*&)bh6!ks6sa$dt02+9x#1r3%so%tgg__e')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG_ON', 'False')
 
 ALLOWED_HOSTS = [
     'funkybloom.site',

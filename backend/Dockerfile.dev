@@ -16,8 +16,7 @@ ENV MESON_SKIP_TESTS=1
 WORKDIR /backend
 
 COPY ./requirements.txt ./requirements.txt
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
 
