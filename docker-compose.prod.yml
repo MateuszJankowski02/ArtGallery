@@ -14,7 +14,7 @@ services:
       - artgallery_net
 
   backend:
-    image: artgallery_backend:prod  # use a pre-built backend image
+    image: mateuszjankowski02/artgallery_backend:prod  # use a pre-built backend image
     environment:
       - DJANGO_DEBUG_ON=False
     secrets:
@@ -23,8 +23,7 @@ services:
       - postgres_user
       - postgres_password
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     networks:
       - artgallery_net
 

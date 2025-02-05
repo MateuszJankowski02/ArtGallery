@@ -1,29 +1,41 @@
 FROM python:3.10-slim
 
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    gnupg \
-    build-essential \
-    gcc \
-    cmake \
-    pkg-config \
-    autoconf \
-    automake \
+RUN apt-get update -yqq \
+    && apt-get upgrade -yqq \
+    && apt-get install -yqq --no-install-recommends \
+       libpq-dev \
+       gnupg \
+       build-essential \
+       gcc \
+       cmake \
+       pkg-config \
+       autoconf \
+       automake \
+       netcat-openbsd \
+       python3-pandas \
+       python3-numpy \
     && rm -rf /var/lib/apt/lists/*
 
 ENV MESON_SKIP_TESTS=1
+ENV PYTHONPATH="${PYTHONPATH}:/usr/lib/python3/dist-packages"
+ENV PIP_EXTRA_INDEX_URL=https://www.piwheels.org/simple
 
 WORKDIR /backend
 
 COPY ./requirements.txt ./requirements.txt
-RUN pip install --upgrade pip \
+RUN pip install --upgrade pip setuptools wheel \
     && pip install gunicorn==20.1.0 \
     && pip install -r requirements.txt
-    
 
 COPY . .
 
 WORKDIR /backend/backendapi
 
-# Use Gunicorn with a sample worker count and sync worker class.
-CMD ["gunicorn", "backendapi.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3", "--worker-class", "sync"]
+EXPOSE 8000
+
+# Copy the entrypoint script and make it executable.
+COPY ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Use the entrypoint script as the container entrypoint.
+CMD ["/entrypoint.sh"]
